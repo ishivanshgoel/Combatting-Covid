@@ -1,7 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
-from django.http import HttpResponse
 
 def index(request):
     ## page showing navigating options
@@ -15,3 +15,5 @@ def hospitals(request):
 
 def pharma(request):
     return render(request, "public/pharma.html")
+
+

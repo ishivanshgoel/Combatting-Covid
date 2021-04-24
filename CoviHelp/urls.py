@@ -10,11 +10,11 @@ urlpatterns = [
     path('hospitals', views.hospitals, name='hospitals'),
     path('pharma', views.pharma, name='pharma'),
 
-    path('oxygenlogin', login.oxygenlogin, name='oxygenlogin'),
-    path('hospitalslogin', login.hospitalslogin, name='hospitalslogin'),
-    path('pharmalogin', login.pharmalogin, name='pharmalogin'),
+    path('login/oxygen', login.oxygenlogin, name='oxygenlogin'),
+    path('login/hospitals', login.hospitalslogin, name='hospitalslogin'),
+    path('login/pharma', login.pharmalogin, name='pharmalogin'),
 
-    path('oxygenregister', register.oxygenregister, name='oxygenregister'),
-    path('hospitalsregister', register.hospitalsregister, name='hospitalsregister'),
-    path('pharmaregister', register.pharmaregister, name='pharmaregister'),
+    path('reg/oxygen', register.oxygenregister, name='oxygenregister'),
+    path('reg/hospitals', register.hospitalsregister, name='hospitalsregister'),
+    path('reg/pharma', register.pharmaregister, name='pharmaregister'),
 ]

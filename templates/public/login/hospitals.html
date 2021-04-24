@@ -3,7 +3,7 @@
 {% block body %}
 
 <div style="margin: 50px;">
-    <form action="/hospitalslogin" method="post">
+    <form action="/login/hospitals" method="post">
         {% csrf_token %}
         {{ form }}
         <button type="submit" class="btn btn-primary">Submit</button>

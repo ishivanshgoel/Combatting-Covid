@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
 # default User Model
-from .models import User
+from django.contrib.auth.models import User
 
-# all register views
+# Other Models
+from .models import UserInfo
 
-## register
+# register view
 def register(request):
     '''
     process the form and 
@@ -21,16 +22,16 @@ def register(request):
         if userType and userPassword and userEmail:
             user = None
             try:
-                user = User.objects.get(email=userEmail)
+                user = User.objects.get(username=userEmail)
             except User.DoesNotExist:
                 user = None
 
             if user is None:
-                user = User()
-                user.email = userEmail
-                user.password = userPassword
-                user.user_type = userType
-                user.save()
+                user = User.objects.create_user(username = userEmail, password = userPassword)
+                userInfo = UserInfo()
+                userInfo.user = user
+                userInfo.user_type = userType
+                userInfo.save()
                 return HttpResponse('User Created')
             else:
                 return HttpResponse('User already exists')

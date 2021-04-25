@@ -1,26 +1,52 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
+## forms
 from .forms import OxygenUser, HospitalUser, PharmaUser
 
 ## all login views
-def oxygenlogin(request):
-    if request.method == 'POST':
-        pass
-    else:
-        form=OxygenUser()
-        return render(request, "public/login/oxygen.html", {'form':form})
 
-def hospitalslogin(request):
+def login(request):
+    '''
+    if request is POST then verify the credentials of the user and redirect to their respective location based on their user type
+    else redirect to '/'
+    '''
     if request.method == 'POST':
+        print("Request: Login")
         pass
     else:
-        form=HospitalUser()
-        return render(request, "public/login/hospitals.html", {'form':form})
+        return HttpResponseRedirect("/")
 
-def pharmalogin(request):
-    if request.method == 'POST':
-        pass
-    else:
-        form=PharmaUser()
-        return render(request, "public/login/pharma.html", {'form':form})
+## user views - display after login
+
+@login_required
+def oxygenuser(request):
+    '''
+    if the user is oxygen supplier
+    '''
+    pass
+
+@login_required
+def hospitaluser(request):
+    '''
+    if the user is hospital
+    '''
+    pass
+
+@login_required
+def pharmauser(request):
+    '''
+    if the user is medicine supplier
+    '''
+    pass
+
+@login_required
+def plasmadonneruser(request):
+    '''
+    if the user is plasma donner
+    '''
+    pass
+
+

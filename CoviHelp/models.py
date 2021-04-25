@@ -1,17 +1,17 @@
 from django.db import models
 
-# Create your models here.
+# default User Model
+from django.contrib.auth.models import User
 
-## General User Model
-class User(models.Model):
+# User Models for Information
+class UserInfo(models.Model):
     TYPE = (
         ('H', 'Hospital'),
         ('O', 'Oxygen'),
         ('P', 'Pharma'),
         ('B', 'Plasma Donor'),
     )
-    email = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     verified = models.BooleanField(default=False)
     user_type = models.CharField(max_length=1, choices=TYPE)
     contact_name = models.CharField(max_length=20)
@@ -22,7 +22,7 @@ class User(models.Model):
     address = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.email} - {self.user_type} - {self.city}'
+        return f'{self.user.username} - {self.user_type} - {self.city}'
 
 
 ## Hospital Model

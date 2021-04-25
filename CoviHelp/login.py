@@ -22,52 +22,20 @@ def login(request):
         except:
             return HttpResponse('Some Error Occured')
         if user is not None:
-            userInfo = UserInfo.objects.get(user__username=user)
-            print(userInfo)
-            print("User type", userInfo.user_type)
-            if(userInfo.user_type == 'O'):
-                return HttpResponseRedirect('/user/oxygen')
-            elif(userInfo.user_type == 'P'):
-                return HttpResponseRedirect('/user/pharma')
-            elif(userInfo.user_type == 'H'):
-                return HttpResponseRedirect('/user/hospital')
-            elif(userInfo.user_type == 'B'):
-                return HttpResponseRedirect('/user/plasma')
+            return HttpResponseRedirect('/user')
         else:
             return HttpResponse('Invalid username/ password')
 
     else:
         return HttpResponseRedirect("/")
 
-## user views - display after login
+## user view - display after login
 
 @login_required
-def oxygenuser(request):
+def user(request):
     '''
-    if the user is oxygen supplier
+    user
     '''
-    
-    return HttpResponse('I am Oxygen Supplier')
-
-@login_required
-def hospitaluser(request):
-    '''
-    if the user is hospital
-    '''
-    return HttpResponse('I am a Hospital')
-
-@login_required
-def pharmauser(request):
-    '''
-    if the user is medicine supplier
-    '''
-    return HttpResponse('I am Medicine Supplier')
-
-@login_required
-def plasmauser(request):
-    '''
-    if the user is plasma donner
-    '''
-    return HttpResponse('I am Plasma Donor')
+    return HttpResponse('I am a user')
 
 

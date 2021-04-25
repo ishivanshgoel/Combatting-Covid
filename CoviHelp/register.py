@@ -15,11 +15,10 @@ def register(request):
     register the user
     '''
     if request.method == 'POST':
-        userType = request.POST.get('userType', None)
         userPassword = request.POST.get('userPassword', None)
         userEmail = request.POST.get('userEmail', None)
 
-        if userType and userPassword and userEmail:
+        if userPassword and userEmail:
             user = None
             try:
                 user = User.objects.get(username=userEmail)
@@ -30,7 +29,6 @@ def register(request):
                 user = User.objects.create_user(username = userEmail, password = userPassword)
                 userInfo = UserInfo()
                 userInfo.user = user
-                userInfo.user_type = userType
                 userInfo.save()
                 return HttpResponse('User Created')
             else:

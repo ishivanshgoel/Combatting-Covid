@@ -11,10 +11,7 @@ urlpatterns = [
     path('pharma', views.pharma, name='pharma'),
 
     path('login', login.login, name='login'),
-    path('user/oxygen', login.oxygenuser, name="oxygenuser"),
-    path('user/plasma', login.plasmauser, name="plasmauser"),
-    path('user/hospital', login.hospitaluser, name="hospitaluser"),
-    path('user/pharma', login.oxygenuser, name="oxygenuser"),
+    path('user', login.user, name="user"),
 
     path('register', register.register, name='register'),
 ]

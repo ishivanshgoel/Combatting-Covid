@@ -36,6 +36,7 @@ def user(request):
     '''
     user
     '''
-    return HttpResponse('I am a user')
+    print(request.user)
+    return render(request, "user/oxygen.html")
 
 

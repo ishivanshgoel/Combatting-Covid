@@ -7,24 +7,60 @@
     <input type="text" class="form-control" placeholder="City/State Name" aria-label="City/State Name" aria-describedby="button-addon2">
     <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
   </div>
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-        {% for i in '12345678' %}
-      <tr>
-        <th scope="row">{{i}}</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
+  <div class="accordion" id="accordionExampl">
+      {% for i in '1234567' %}
+      <div class="accordion-item  accordianCustom">
+        <h2 class="accordion-header" id="headingOne" >
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              HOSPITAL/DISTRIBUTOR NAME
+              <span class="badge bg-secondary">Verified</span>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+              <span class="badge bg-primary">Delhi</span><span class="badge bg-primary">Available</span><br>
+              <hr></hr>
+              <table class="table table-striped"><tr>
+                  <td>
+                      <strong>Remedesivir</strong>
+                      </td>
+                      <td>
+                      <span class="badge bg-danger">5</span>/9
+                      </td>
+                  </td>
+              </tr>
+                  <tr>
+                      <td>
+                          <strong>hydroxychloroquine</strong>
+                          </td>
+                          <td>
+                          <span class="badge bg-danger">5</span>/9
+                          </td>
+                      </td>
+                  </tr><tr>
+                      <td>
+                          <strong>ICU</strong>
+                      </td>
+                      
+                      <td>
+                          <span class="badge bg-danger">5</span>/9
+                          </td>
+                  </tr><tr>
+                      <td>
+                          <strong>ICU without ventilator</strong>
+                      </td>
+                      
+                      <td>
+                          <span class="badge bg-danger">5</span>/9
+                          </td>
+                  </tr>
+                  <hr></hr>
+                </table>
+                <b>Phone:</b> 8218288128<br> <b>Address:</b><i> Opp. D.R.M. Office, Naroda Rd, nr. Chamunda Bridge, Saraspur, Ahmedabad, Gujarat 380025, India</i>
+  
+          </div>
+        </div>
+      </div>
       {% endfor %}
-    </tbody>
-  </table>
+    </div>
 {% endblock body %}

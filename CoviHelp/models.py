@@ -9,25 +9,27 @@ class UserInfo(models.Model):
     verified = models.BooleanField(default=False)
     contact_name = models.CharField(max_length=20)
     mobile = models.CharField(max_length=10)
-    city = models.CharField(max_length=20)
-    state = models.CharField(max_length=20)
-    pincode = models.CharField(max_length=6)
-    address = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.user.username} - {self.city}'
+        return f'{self.user.username} - {self.contact_name}'
 
 
 ## Hospital Model
 class Hospital(models.Model):
-    hospital_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.
 
 ## Oxygen Supplier Model
 class Oxygen(models.Model):
-    oxygen_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     available = models.CharField(max_length=5)
 
 ## Medicine Supplier Model
 class Pharma(models.Model):
-    pharma_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     ##available_drugs = models.ArrayField()
+
+## Plasma Donor
+class Plasma(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=10)

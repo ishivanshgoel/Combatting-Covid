@@ -35,31 +35,81 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'pharma' %}">Pharma</a>
+          </li> 
+          <li class="nav-item">
+             <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModel" data-bs-whatever="@mdo" style="cursor:pointer">Login</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownexpand" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Update
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownexpand">
-              <li><a class="nav-link" href="{% url 'pharmalogin' %}">Pharma Login</a></li>
-              <li><a class="nav-link" href="{% url 'hospitalslogin' %}">Hospital Login</a></li>
-              <li><a class="nav-link" href="{% url 'oxygenlogin' %}">Oxygen Login</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdownexpand2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Register
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownexpand2">
-              <li><a class="nav-link" href="{% url 'pharmaregister' %}">Pharma Register</a></li>
-              <li><a class="nav-link" href="{% url 'hospitalsregister' %}">Hospital Register</a></li>
-              <li><a class="nav-link" href="{% url 'oxygenregister' %}">Oxygen Register</a></li>
-            </ul>
+
+          <li class="nav-item">
+             <a class="nav-link" data-bs-toggle="modal" data-bs-target="#registerModel" data-bs-whatever="@mdo" style="cursor:pointer">Register</a>
           </li>
         </ul>
       </div>
     </div>
   </nav><br><br><br>
+
+  {% comment %} Login Model {% endcomment %}
+    <div class="modal fade" id="loginModel" tabindex="-1" aria-labelledby="loginModelLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModelLabel">Login - Update</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="/login">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" name='email'>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name='password'>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  {% comment %} register model {% endcomment %}
+    <div class="modal fade" id="registerModel" tabindex="-1" aria-labelledby="registerModelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModelLabel">Register</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="/register">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Email address</label>
+              <input type="email" class="form-control" name="userEmail">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" name="userPassword">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Confirm Password</label>
+              <input type="password" class="form-control">
+            </div>
+        </div>
+        <div class="modal-footer">
+           <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
   {% block body %} 
   {% endblock body %}
   <br><br><br>

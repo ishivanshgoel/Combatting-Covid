@@ -37,6 +37,38 @@ def user(request):
     user
     '''
     print(request.user)
+    return render(request, "user/account.html")
+
+@login_required
+def plasma(request):
+    '''
+    user
+    '''
+    print(request.user)
+    return render(request, "user/plasma.html")
+
+@login_required
+def oxygen(request):
+    '''
+    user
+    '''
+    print(request.user)
     return render(request, "user/oxygen.html")
+
+@login_required
+def hospital(request):
+    '''
+    user
+    '''
+    print(request.user)
+    return render(request, "user/hospital.html")
+
+@login_required
+def pharma(request):
+    '''
+    user
+    '''
+    print(request.user)
+    return render(request, "user/pharma.html")
 
 

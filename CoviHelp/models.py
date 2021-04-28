@@ -28,7 +28,7 @@ class Oxygen(models.Model):
     name = models.CharField(max_length=20)
     contact = models.CharField(max_length=10)
     state = models.CharField(max_length=10)
-    city = models.CharField(max_length=10)
+    city = models.CharField(max_length=20)
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.contact}'
@@ -46,7 +46,7 @@ class Plasma(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     state = models.CharField(max_length=10)
-    city = models.CharField(max_length=10)
+    city = models.CharField(max_length=20)
     donortype = models.CharField(max_length=10)
     contact = models.CharField(max_length=10)
 

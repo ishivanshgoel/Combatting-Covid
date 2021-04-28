@@ -92,8 +92,6 @@ def oxygen(request):
         return render(request, "user/oxygen.html", {
             'states': states
         })
-    # print(request.user)
-    # return render(request, "user/oxygen.html")
 
 @login_required
 def hospital(request):

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login
 
 # user info model
 from .models import UserInfo
-from .models import Plasma
+from .models import Plasma,Oxygen
 
 # helper functions
 from .Helpers.Statesdata import Statesdata
@@ -74,8 +74,26 @@ def oxygen(request):
     '''
     user
     '''
-    print(request.user)
-    return render(request, "user/oxygen.html")
+    if request.method == 'POST':
+        try:
+            Oxy = Oxygen()
+            Oxy.user = request.user
+            Oxy.name = request.POST['name']
+            Oxy.state = request.POST['state']
+            Oxy.city = request.POST['city']
+            Oxy.contact = request.POST['contact']
+            Oxy.save()
+            return HttpResponse('Saved')
+        except:
+            return HttpResponse('Error')
+    else:
+        st = Statesdata()
+        states = st.getStates()
+        return render(request, "user/oxygen.html", {
+            'states': states
+        })
+    # print(request.user)
+    # return render(request, "user/oxygen.html")
 
 @login_required
 def hospital(request):

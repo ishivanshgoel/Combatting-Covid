@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # User Models for Information
+
+
 class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     verified = models.BooleanField(default=False)
@@ -14,24 +16,35 @@ class UserInfo(models.Model):
         return f'{self.user.username} - {self.contact_name}'
 
 
-## Hospital Model
+# Hospital Model
 class Hospital(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-## Oxygen Supplier Model
+# Oxygen Supplier Model
+
+
 class Oxygen(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    available = models.CharField(max_length=5)
+    name = models.CharField(max_length=20)
+    contact = models.CharField(max_length=10)
+    state = models.CharField(max_length=10)
+    city = models.CharField(max_length=10)
 
-## Medicine Supplier Model
+    def __str__(self):
+        return f'{self.name} - {self.state} - {self.city} - {self.contact}'
+
+
+# Medicine Supplier Model
 class Pharma(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ##available_drugs = models.ArrayField()
 
-## Plasma Donor
+# Plasma Donor
+
+
 class Plasma(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=20)
     state = models.CharField(max_length=10)
     city = models.CharField(max_length=10)
     donortype = models.CharField(max_length=10)
@@ -39,4 +52,3 @@ class Plasma(models.Model):
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.contact}'
-

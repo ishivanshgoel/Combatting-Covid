@@ -17,7 +17,6 @@ class UserInfo(models.Model):
 ## Hospital Model
 class Hospital(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.
 
 ## Oxygen Supplier Model
 class Oxygen(models.Model):
@@ -33,3 +32,11 @@ class Pharma(models.Model):
 class Plasma(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=10)
+    state = models.CharField(max_length=10)
+    city = models.CharField(max_length=10)
+    donortype = models.CharField(max_length=10)
+    contact = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.contact}'
+

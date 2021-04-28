@@ -57,7 +57,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="POST" action="/login">
+            <form method="POST" action="{% url 'login' %}">
               {% csrf_token %}
               <div class="mb-3">
                 <label class="form-label">Email address</label>
@@ -85,7 +85,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="/register">
+          <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
             <div class="mb-3">
               <label class="form-label">Email address</label>

@@ -10,7 +10,7 @@ urlpatterns = [
     path('hospitals', views.hospitals, name='hospitals'),
     path('pharma', views.pharma, name='pharma'),
 
-    path('login', login.login, name='login'),
+    path('login', login.loginview, name='login'),
 
     path('user', login.user, name="user"),
     path('user/plasma', login.plasma, name="userplasma"),
@@ -19,4 +19,7 @@ urlpatterns = [
     path('user/hospital', login.hospital, name="userhospital"),
 
     path('register', register.register, name='register'),
+
+    path('helper/districts/', login.getDistricts, name='getdistricts')
+
 ]

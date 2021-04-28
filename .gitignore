@@ -4,3 +4,5 @@ CoviHelp/__pycache__
 CoviHelp/Helpers/__pycache__
 
 CoviHelp/migrations
+
+db.sqlite3

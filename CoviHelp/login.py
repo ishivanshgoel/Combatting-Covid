@@ -124,7 +124,7 @@ def pharma(request):
             pharma.city = request.POST['city']
             pharma.contact = request.POST['contact']
             pharma.address = request.POST['address']
-            pharma.available_drugs=request.POST['drugs']
+            pharma.available_drugs = request.POST.getlist('checks[]')
             pharma.save()
             return HttpResponse('Saved')
         except:

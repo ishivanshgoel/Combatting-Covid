@@ -29,7 +29,7 @@ class Oxygen(models.Model):
     contact = models.CharField(max_length=10)
     state = models.CharField(max_length=10)
     city = models.CharField(max_length=20)
-    address = models.TextField(blank=True, default=False)
+    address = models.TextField(blank=True, default="")
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.address}'
@@ -39,10 +39,10 @@ class Oxygen(models.Model):
 class Pharma(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
-    contact = models.CharField(max_length=10, default=True)
-    state = models.CharField(max_length=10, default=True)
-    city = models.CharField(max_length=20, default=True)
-    address = models.TextField(blank=True, default=False)
+    contact = models.CharField(max_length=10, default="")
+    state = models.CharField(max_length=10, default="")
+    city = models.CharField(max_length=20, default="")
+    address = models.TextField(blank=True, default="")
     available_drugs = models.TextField(blank=True)
 
     def __str__(self):

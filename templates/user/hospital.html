@@ -1,281 +1,6 @@
 {% extends 'userlayout.html' %}
 
 {% block body %}
-<style>
-    /* body {
-        background-color: #bababd;
-    }
-
-    .contact {
-        padding: 4%;
-        height: 400px;
-    }
-
-    .col-md-3 {
-        background: #ff9b00;
-        padding: 4%;
-        border-top-left-radius: 0.5rem;
-        border-bottom-left-radius: 0.5rem;
-    }
-
-    .contact-info {
-        margin-top: 10%;
-    }
-
-    .contact-info img {
-        margin-bottom: 15%;
-    }
-
-    .contact-info h2 {
-        margin-bottom: 10%;
-    }
-
-    
-
-    .contact-form label {
-        font-weight: 600;
-    }
-
-    .contact-form button {
-        background: #25274d;
-        color: #fff;
-        font-weight: 600;
-        width: 25%;
-    }
-
-    .contact-form button:focus {
-        box-shadow: none;
-    } */
-    @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
-    font-family: 'Josefin Sans', sans-serif
-}
-
-
-body {
-    background-color: #f3f5f9
-}
-@media (min-width: 600px){
-
-.wrapper {
-    display: flex;
-    position: relative
-}
-
-.wrapper .sidebar {
-    width: 250px;
-    height: 100%;
-    background: #FF9B00;
-    padding: 30px 0px;
-    position: fixed;
-    overflow: auto;
-}
-
-.wrapper .sidebar h2 {
-    color: #000;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 30px
-}
-
-.wrapper .sidebar ul li {
-    padding: 15px;
-    border-bottom: 1px solid #000;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.05)
-}
-
-.wrapper .sidebar ul li a {
-    color: #000;
-    display: block
-}
-
-.wrapper .sidebar ul li a .fa {
-    width: 25px
-}
-
-.wrapper .sidebar ul li:hover {
-    background-color: #7d777717
-}
-
-.wrapper .sidebar ul li:hover a {
-    color: #fff
-}
-
-.wrapper .sidebar .social_media {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex
-}
-
-.wrapper .sidebar .social_media a {
-    display: block;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    line-height: 45px;
-    text-align: center;
-    margin: 0 5px;
-    color: #bdb8d7;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px
-}
-
-.wrapper .main_content {
-    width: 100%;
-    margin-left: 250px;
-    position:fixed;
-}
-
-.wrapper .main_content .header {
-    padding: 20px;
-    background: #d68305;
-    color: #000;
-    border-bottom: 1px solid #e0e4e8
-}
-
-.wrapper .main_content .info {
-    margin: 20px;
-    color: #717171;
-    line-height: 25px
-}
-
-.wrapper .main_content .info div {
-    margin-bottom: 20px
-}
-.custombtngrp{
-    zoom: 0.7;
-}
-.sidecard{
-    /* background-color: #d68305; */
-    margin-left: -5vh;
-}
-.sidebar::-webkit-scrollbar {
-  width: 1px;
-}
-}
-@media only screen and (max-width: 600px){
-	/*Big smartphones [426px -> 600px]*/
-.sidebar::-webkit-scrollbar {
-  width: 10px;
-}
-.wrapper {
-    display: flex;
-    position: relative
-}
-.wrapper .sidebar {
-    box-shadow: 0px 4px 0.2pc 0px;
-    width: 92%;
-    height: 40vh;
-    background: orange;
-    padding: 2%;
-    position: absolute;
-    overflow: auto;
-    z-index: 999;
-    zoom: 0.7;
-    margin: 4%;
-}
-.sidebar::-webkit-scrollbar {
-  width: 1px;
-}
-.wrapper .sidebar h2 {
-    color: #000;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 30px
-}
-
-.wrapper .sidebar ul li {
-    padding: 15px;
-    border-bottom: 1px solid #000;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.05)
-}
-
-.wrapper .sidebar ul li a {
-    color: #000;
-    display: block
-}
-
-.wrapper .sidebar ul li a .fa {
-    width: 25px
-}
-
-.wrapper .sidebar ul li:hover {
-    background-color: #7d777717
-}
-
-.wrapper .sidebar ul li:hover a {
-    color: #fff
-}
-
-.wrapper .sidebar .social_media {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex
-}
-
-.wrapper .sidebar .social_media a {
-    display: block;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    line-height: 45px;
-    text-align: center;
-    margin: 0 5px;
-    color: #bdb8d7;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px
-}
-
-.wrapper .main_content {
-    padding: 4%;
-    width: 100%;
-    margin-left: 0px;
-    margin-top: 30vh;
-}
-
-.wrapper .main_content .header {
-    padding: 20px;
-    background: orange;
-    color: #000;
-    box-shadow: 0px 4px 0.2pc 0px;
-
-    border-bottom: 1px solid #e0e4e8
-}
-
-.wrapper .main_content .info {
-    margin: 20px;
-    color: #717171;
-    line-height: 25px
-}
-
-.wrapper .main_content .info div {
-    margin-bottom: 20px
-}
-.custombtngrp{
-    zoom: 0.7;
-}
-.sidecard{
-    /* background-color: #d68305; */
-    margin-left: -5vh;
-}
-#headingSidebar{
-    padding: 2%;
-    box-shadow: inset 0px 2px 10px 0px white;
-}
-}
-</style>
 <div class="wrapper">
     <div class="sidebar">
         <h2 id="headingSidebar">Your Added Resources</h2>
@@ -289,19 +14,20 @@ body {
                 <div class="btn-group custombtngrp">
                     <a href="#" class="btn btn-primary btnModif">Modify</a>
                     <a href="#" class="btn btn-danger btnDlt">Delete</a>
-                  </div>
-            <!-- </a> -->
+                </div>
+                <!-- </a> -->
             </li>
         </ul>
         {% endfor %}
-        <div class="social_media"> <a href="#"><i class="fa fa-facebook-f"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> </div>
+        <div class="social_media"> <a href="#"><i class="fa fa-facebook-f"></i></a> <a href="#"><i
+                    class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> </div>
     </div>
     <div class="main_content">
         <div class="header">
-                <div class="contact-info">
-                    <h2>Hospitals</h2>
-                    <h4>Please Make sure that the information you add is authentic and verified !!</h4>
-                </div>
+            <div class="contact-info">
+                <h2>Hospitals</h2>
+                <h4>Please Make sure that the information you add is authentic and verified !!</h4>
+            </div>
         </div>
         <div class="info">
             <div class="col-md-9">
@@ -309,13 +35,15 @@ body {
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="fname">First Name:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
+                            <input type="text" class="form-control" id="fname" placeholder="Enter First Name"
+                                name="fname">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="lname">Last Name:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="lname">
+                            <input type="text" class="form-control" id="lname" placeholder="Enter Last Name"
+                                name="lname">
                         </div>
                     </div>
                     <div class="form-group">
@@ -337,22 +65,8 @@ body {
                     </div>
                 </div>
             </div>
-            <!-- <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus. Nibh praesent tristique magna sit amet purus gravida quis. Lacus luctus accumsan tortor posuere. Vitae sapien pellentesque habitant morbi tristique senectus et. Odio ut sem nulla pharetra diam sit amet nisl. Consectetur purus ut faucibus pulvinar elementum integer. Pretium fusce id velit ut tortor. Fringilla est ullamcorper eget nulla facilisi etiam dignissim. Lectus proin nibh nisl condimentum. Sed vulputate odio ut enim blandit volutpat maecenas volutpat. Sollicitudin ac orci phasellus egestas tellus. Elit pellentesque habitant morbi tristique senectus et netus. Massa tincidunt dui ut ornare lectus sit amet est placerat. Nibh nisl condimentum id venenatis a condimentum vitae sapien pellentesque. Quis hendrerit dolor magna eget. Amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et.</div>
-            <div>Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Nec sagittis aliquam malesuada bibendum arcu vitae. Montes nascetur ridiculus mus mauris vitae ultricies leo. Magnis dis parturient montes nascetur ridiculus mus mauris vitae. Aliquam ultrices sagittis orci a scelerisque purus semper eget duis. In arcu cursus euismod quis viverra. Et ultrices neque ornare aenean. Massa sapien faucibus et molestie ac feugiat sed lectus. Adipiscing elit ut aliquam purus sit amet luctus venenatis. Neque convallis a cras semper auctor neque vitae tempus quam. Id nibh tortor id aliquet lectus proin. Tempus egestas sed sed risus pretium quam vulputate dignissim. Metus aliquam eleifend mi in nulla posuere sollicitudin. Quam pellentesque nec nam aliquam sem.</div> -->
         </div>
     </div>
 </div>
-<!-- <div class="container contact">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="contact-info">
-                <h2>Hospitals</h2>
-                <h4>Please Make sure that the information you add is authentic and verified !!</h4>
-            </div>
-        </div>
-        
-    </div>
-</div> -->
 
 {% endblock body %}

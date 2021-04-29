@@ -68,8 +68,10 @@ def plasma(request):
     else:
         st = Statesdata()
         states = st.getStates()
+        plasma = Plasma.objects.filter(user=request.user)
         return render(request, "user/plasma.html", {
-            'states': states
+            'states': states,
+            "plasma" : plasma
         })
 
 
@@ -94,8 +96,10 @@ def oxygen(request):
     else:
         st = Statesdata()
         states = st.getStates()
+        oxygen = Oxygen.objects.filter(user=request.user)
         return render(request, "user/oxygen.html", {
-            'states': states
+            'states': states,
+            'oxygen' : oxygen
         })
 
 
@@ -132,9 +136,11 @@ def pharma(request):
     else:
         st = Statesdata()
         states = st.getStates()
+        pharma = Pharma.objects.filter(user=request.user)
         return render(request, "user/pharma.html", {
             'states': states,
-            "drugs":available_drugs
+            "drugs":available_drugs,
+            "pharma":pharma
         })
 
 

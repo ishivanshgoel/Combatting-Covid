@@ -30,6 +30,7 @@ class Oxygen(models.Model):
     state = models.CharField(max_length=10)
     city = models.CharField(max_length=20)
     address = models.TextField(blank=True, default=False)
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.address}'
@@ -44,6 +45,7 @@ class Pharma(models.Model):
     city = models.CharField(max_length=20, default=True)
     address = models.TextField(blank=True, default=False)
     available_drugs = models.TextField(blank=True)
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.address} -{self.available_drugs}'
@@ -59,6 +61,7 @@ class Plasma(models.Model):
     city = models.CharField(max_length=20)
     donortype = models.CharField(max_length=10)
     contact = models.CharField(max_length=10)
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.contact}'

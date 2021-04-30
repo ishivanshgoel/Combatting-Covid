@@ -1,3 +1,4 @@
+console.log("Connected to cutum.js")
 let baseurl = 'http://localhost:8000/'
 
 /**
@@ -29,4 +30,32 @@ document.getElementById("state").addEventListener("change", async ()=>{
             c.add(option, c[index+1])
         })
     })
+});
+
+// modify calls
+$('.btn-Modify').click(function(){
+    console.log("Modify Function called")
+    var url = $(this).data("url"); 
+    console.log("URL ", url)
+    $.ajax({
+        url: baseurl + url,
+        dataType: 'json',
+        success: function(res) {
+
+            // get the ajax response data
+            var data = res.body;
+
+            // update modal content here
+            // you may want to format data or 
+            // update other modal elements here too
+            $('.modal-body').text(data);
+
+            // show modal
+            $('#modifyModal').modal('show');
+
+        },
+        error:function(request, status, error) {
+            console.log("ajax call went wrong:" + request.responseText);
+        }
+    });
 });

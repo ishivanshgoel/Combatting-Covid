@@ -13,83 +13,100 @@
                 {{ o.name }} - {{ o.city }}
                 <br>
                 <div class="btn-group custombtngrp">
-                    <a href="#" class="btn btn-primary btnModif">Modify</a>
-                    <a href="#" class="btn btn-danger btnDlt">Delete</a>
-                  </div>
-            <!-- </a> -->
+                    <button class="btn btn-success btn-action btn-Modify"
+                        data-url="/user/oxygen/modify/?id={{ o.id }}">Modify</button>
+                    <button class="btn btn-danger btn-action btn-Delete"
+                        data-url="/user/oxygen/delete/?id={{ o.id }}">Delete</button>
+                </div>
+                <!-- </a> -->
             </li>
         </ul>
         {% endfor %}
-        <div class="social_media"> <a href="#"><i class="fa fa-facebook-f"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> </div>
+        <div class="social_media"> <a href="#"><i class="fa fa-facebook-f"></i></a> <a href="#"><i
+                    class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> </div>
     </div>
     <div class="main_content">
         <div class="header">
             <div class="contact-info">
                 <h2>Oxygen Supplier</h2>
-                <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat excepturi debitis delectus omnis hic cum vel architecto minus ducimus soluta a pariatur dolores, magnam reiciendis voluptatum deleniti esse quod ipsa.!!</h6>
+                <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat excepturi debitis delectus omnis
+                    hic cum vel architecto minus ducimus soluta a pariatur dolores, magnam reiciendis voluptatum
+                    deleniti esse quod ipsa.!!</h6>
             </div>
         </div>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="margin: 20px;">
+            <strong>{{ message|safe }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
         <div class="info">
-                <form class="contact-form" method="POST" action="/user/oxygen">
-                    {% csrf_token %}
-                    <!-- name -->
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="name">Name:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="name">
-                        </div>
-                    </div>
-                    <!-- state -->
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="state">State:</label>
-                        <div class="col-sm-10">
-                            <select class="form-control dropdown" name='state' id='state'>
-                                <option value="None" selected>Click to choose State</option>
-                                {% for state in states %}
-                                    <option value="{{ state }}">{{ state }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    <!-- city -->
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="city">City:</label>
-                        <div class="col-sm-10">
-                            <select class="form-control dropdown" name='city' id='city'>
-                                <option value="None" selected>Click to choose district</option>
-                            </select>
-                        </div>
+            <form class="contact-form" method="POST" action="/user/oxygen">
+                {% csrf_token %}
+                <!-- name -->
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="name">Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="name">
                     </div>
                 </div>
+                <!-- state -->
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="address">Address:</label>
+                    <label class="control-label col-sm-2" for="state">State:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Enter Address " name="address">
+                        <select class="form-control dropdown" name='state' id='state'>
+                            <option value="None" selected>Click to choose State</option>
+                            {% for state in states %}
+                            <option value="{{ state }}">{{ state }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
+                <!-- city -->
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="contact">Contact:</label>
+                    <label class="control-label col-sm-2" for="city">City:</label>
                     <div class="col-sm-10">
-                        <input type="contact" class="form-control" placeholder="Enter Mobile Number" name="contact">
+                        <select class="form-control dropdown" name='city' id='city'>
+                            <option value="None" selected>Click to choose district</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10 py-3">
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-           
-    </div>
-</div>
-<div class="container contact">
-    <div class="row">
-        <div class="col-md-3">
-            
+                </div>
         </div>
-         <!-- name, state, city, donotype, contact -->
-        <div class="col-md-9">
-            
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="address">Address:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Enter Address " name="address">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="contact">Contact:</label>
+            <div class="col-sm-10">
+                <input type="contact" class="form-control" placeholder="Enter Mobile Number" name="contact">
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10 py-3">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <!-- modal -->
+    <div id="modifyModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
         </div>
     </div>
 </div>

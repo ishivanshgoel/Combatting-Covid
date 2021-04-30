@@ -8,18 +8,17 @@
         {% for p in plasma %}
         <ul>
             <li class="sidecard">
-                <i class="fa fa-home"></i>
                 {{ p.name }} - {{ p.city }}
                 <br>
                 <div class="btn-group custombtngrp">
-                    <a href="#" class="btn btn-primary btnModif">Modify</a>
-                    <a href="#" class="btn btn-danger btnDlt">Delete</a>
+                    <button class="btn btn-success btn-action btn-Modify"
+                        data-url="/user/plasma/modify/?id={{ p.id }}">Modify</button>
+                    <button class="btn btn-danger btn-action btn-Delete"
+                        data-url="/user/plasma/delete/?id={{ p.id }}">Delete</button>
                 </div>
             </li>
         </ul>
         {% endfor %}
-        <div class="social_media"> <a href="#"><i class="fa fa-facebook-f"></i></a> <a href="#"><i
-                    class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> </div>
     </div>
     <div class="main_content">
         <div class="header">
@@ -30,6 +29,14 @@
                     hic cum vel architecto minus ducimus soluta a pariatur dolores, magnam reiciendis voluptatum
                     deleniti esse quod ipsa.!!</h6>
             </div>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="margin: 20px;">
+                <strong>{{ message|safe }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
         <div class="info">
 
@@ -87,25 +94,24 @@
             </form>
         </div>
     </div>
-    <div class="container contact">
-        <div class="row">
-            <div class="col-md-3">
 
-            </div>
-            <!-- name, state, city, donotype, contact -->
-            <div class="col-md-9">
-
+    <!-- modal -->
+    <div id="modifyModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container contact">
-        <div class="row">
-        </div>
-    </div>
 </div>
-</div>
-
 <script src='../../static/js/custom.js'></script>
 
 {% endblock body %}

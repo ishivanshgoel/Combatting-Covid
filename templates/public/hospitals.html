@@ -1,7 +1,13 @@
 {% extends 'layout.html' %}
 
+</style>
 {% block body %}
-<img src="../../static/covidCombat.jpeg" class="img-fluid mainLogo" alt="Responsive image">
+<div class="container">
+  
+<div class="row mainLogo">
+  <img src="../../static/covidCombat.jpeg" class="img-fluid" alt="Responsive image">
+</div>
+<div class="row">
 <div class="input-group mb-3 inputSearchBarCustom">
   <input type="text" class="form-control" placeholder="City/State Name" aria-label="City/State Name" aria-describedby="button-addon2">
   <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
@@ -62,5 +68,7 @@
     </div>
     {% endfor %}
   </div>
-  
+</div>
+</div>
+  <script src='../../static/covihelp.css'></script>
 {% endblock body %}

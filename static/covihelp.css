@@ -15,3 +15,10 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.navbarCustom {
     padding: 3%;
 
 }
+.mainLogo {
+    align-items: center;
+    flex-direction: column;
+}
+.mainLogo > img {
+    width:40vh;
+}

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 # user info model
 from .models import UserInfo
@@ -12,9 +13,14 @@ from .models import Plasma, Oxygen, Pharma
 from .Helpers.Statesdata import Statesdata
 import json
 
+# helpers
+available_drugs = ["Tocilizumab", "Remdesivir",
+                       "Favipiravir", "Fabiflu 200 MG"]
+    
+st = Statesdata()
+states = st.getStates()
+
 # all login views
-
-
 def loginview(request):
     '''
     if request is POST then verify the credentials of the user and redirect to their respective location based on their user type
@@ -49,26 +55,26 @@ def user(request):
 
 @login_required
 def plasma(request):
-    '''
-    user
-    '''
+    global states
+    plasma = Plasma.objects.filter(user=request.user)
     if request.method == 'POST':
         try:
-            plasma = Plasma()
-            plasma.user = request.user
-            plasma.name = request.POST['name']
-            plasma.state = request.POST['state']
-            plasma.city = request.POST['city']
-            plasma.donortype = request.POST['donortype']
-            plasma.contact = request.POST['contact']
-            plasma.save()
-            return HttpResponse('Saved')
+            p = Plasma()
+            p.user = request.user
+            p.name = request.POST['name']
+            p.state = request.POST['state']
+            p.city = request.POST['city']
+            p.donortype = request.POST['donortype']
+            p.contact = request.POST['contact']
+            p.save()
+            messages.success(request, 'Thankyou for sharing the information.')
         except:
-            return HttpResponse('Error')
+            messages.error(request, 'Error!!')
+        return render(request, "user/plasma.html", {
+            'states': states,
+            "plasma" : plasma
+        })
     else:
-        st = Statesdata()
-        states = st.getStates()
-        plasma = Plasma.objects.filter(user=request.user)
         return render(request, "user/plasma.html", {
             'states': states,
             "plasma" : plasma
@@ -77,9 +83,8 @@ def plasma(request):
 
 @login_required
 def oxygen(request):
-    '''
-    user
-    '''
+    global states
+    oxygen = Oxygen.objects.filter(user=request.user)
     if request.method == 'POST':
         try:
             Oxy = Oxygen()
@@ -90,13 +95,15 @@ def oxygen(request):
             Oxy.contact = request.POST['contact']
             Oxy.address = request.POST['address']
             Oxy.save()
-            return HttpResponse('Saved')
+            messages.success(request, 'Thankyou for sharing the information.')
         except:
-            return HttpResponse('Error')
+            messages.error(request, 'Error!!')
+        return render(request, "user/oxygen.html", {
+            'states': states,
+            'oxygen' : oxygen
+        })
+
     else:
-        st = Statesdata()
-        states = st.getStates()
-        oxygen = Oxygen.objects.filter(user=request.user)
         return render(request, "user/oxygen.html", {
             'states': states,
             'oxygen' : oxygen
@@ -114,29 +121,30 @@ def hospital(request):
 
 @login_required
 def pharma(request):
-    '''
-    user
-    '''
-    available_drugs = ["Tocilizumab", "Remdesivir",
-                       "Favipiravir", "Fabiflu 200 MG"]
+    global available_drugs, states
+    pharma = Pharma.objects.filter(user=request.user)
+
     if request.method == 'POST':
         try:
-            pharma = Pharma()
-            pharma.user = request.user
-            pharma.name = request.POST['name']
-            pharma.state = request.POST['state']
-            pharma.city = request.POST['city']
-            pharma.contact = request.POST['contact']
-            pharma.address = request.POST['address']
-            pharma.available_drugs = request.POST.getlist('checks[]')
-            pharma.save()
-            return HttpResponse('Saved')
+            p = Pharma()
+            p.user = request.user
+            p.name = request.POST['name']
+            p.state = request.POST['state']
+            p.city = request.POST['city']
+            p.contact = request.POST['contact']
+            p.address = request.POST['address']
+            p.available_drugs = request.POST.getlist('checks[]')
+            p.save()
+            messages.success(request, 'Thankyou for sharing the information.')
         except:
-            return HttpResponse('Error')
+            messages.error(request, 'Error!!')
+
+        return render(request, "user/pharma.html", {
+            'states': states,
+            "drugs":available_drugs,
+            "pharma":pharma
+        })
     else:
-        st = Statesdata()
-        states = st.getStates()
-        pharma = Pharma.objects.filter(user=request.user)
         return render(request, "user/pharma.html", {
             'states': states,
             "drugs":available_drugs,

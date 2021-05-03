@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from .models import Oxygen, Pharma, Plasma, Hospital
+import json
+import json as simplejson
 
 # Create your views here.
 def index(request):

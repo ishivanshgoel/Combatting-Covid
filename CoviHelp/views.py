@@ -22,9 +22,7 @@ def pharma(request):
     return render(request, "public/pharma.html", {'states': states})
 
 def getdetails(request):
-    #country_name = request.POST['country_name']
     state= request.GET['cnt']
-    print("hello")
     st = Statesdata()
     data = st.getDistricts(state)  
     return HttpResponse(simplejson.dumps(data),content_type='application/json')

@@ -21,5 +21,7 @@ urlpatterns = [
     path('register', register.register, name='register'),
 
     path('helper/districts/', login.getDistricts, name='getdistricts')
+    
+    path('getdetails',views.getdetails)
 
 ]

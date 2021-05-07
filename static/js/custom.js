@@ -8,7 +8,7 @@ let baseurl = 'http://localhost:8000/'
 
 // helper functions
 async function getDistricts(state){
-    return fetch(baseurl+'helper/districts/?state='+state)
+    return fetch('/helper/districts/?state='+state)
     .then(response => response.json())
 }
 
@@ -59,3 +59,14 @@ $('.btn-Modify').click(function(){
         }
     });
 });
+
+
+//public form submit
+function submitForm(type){
+    console.log("Form Submit")
+    let state = document.getElementById("state").value
+    let district = document.getElementById("city").value
+    let queryString = `/${type}/?state=${state}&district=${district}`
+    $("#myform").attr('action', queryString);
+    $("myForm").submitForm()
+}

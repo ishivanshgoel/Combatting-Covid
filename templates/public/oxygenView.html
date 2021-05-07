@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="accordion" id="accordionExample">
+    {% for resource in resources %}
+    <div class="accordion-item" style="margin:20px">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            {{ resource.name }} - {{ resource.contact }} - {% if resource.verified == True %}
+                                                                <span class="badge bg-success" style="margin: 3px;">Verified</span>
+                                                            {% endif %}
+                                                            {% if resource.verified == False %}
+                                                                <span class="badge bg-info text-dark" style="margin: 3px;">Not Verified</span>
+                                                            {% endif %}
+            </button>
+            </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Contact</th>
+                      <th scope="col">State</th>
+                      <th scope="col">City</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td> {{ resource.name }} </td>
+                      <td> {{ resource.contact }} </td>
+                      <td> {{ resource.state }} </td>
+                      <td> {{ resource.city }} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p>
+            <span class="badge rounded-pill bg-success" style="margin-left: 20px; margin-right: 20px;">Address</span>
+            {{ resource.address }}
+            </p>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+
+
+<script src='../../static/js/custom.js'></script>
+{% endblock body %}

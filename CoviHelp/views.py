@@ -33,7 +33,6 @@ def pharma(request):
         for med in resources:
             med=med.available_drugs.strip("[]").split(",")
             drugs.append(med)
-        print(drugs)
         return render(request, "public/pharmaView.html", {
             "cleaned_resources": zip(resources, drugs)
         })
@@ -67,7 +66,3 @@ def plasma(request):
         st = Statesdata()
         states = st.getStates()
         return render(request, "public/plasma.html", {'states': states})
-
-    
-
-

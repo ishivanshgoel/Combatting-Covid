@@ -47,10 +47,11 @@ def loginview(request):
             login(request, u)
             return redirect(user)
         else:
-            return HttpResponse('Invalid username/ password')
-
+            messages.warning(request, 'Invalid username/ password')
+            return render(request, "public/index.html")
     else:
-        return HttpResponse("Not Allowed")
+        messages.warning(request, 'Not Allowed')
+        return render(request, "public/index.html")
 
 # user view - display after login
 @login_required
@@ -78,7 +79,7 @@ def plasma(request):
             p.save()
             messages.success(request, 'Thankyou for sharing the information.')
         except:
-            messages.error(request, 'Error!!')
+            messages.warning(request, 'Error!!')
         return render(request, "user/plasma.html", {
             'states': states,
             "plasma" : plasma

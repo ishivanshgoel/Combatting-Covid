@@ -5,6 +5,7 @@
 <div class="wrapper">
     <div class="sidebar">
         <h6 style="margin: 10px; border: 2px black dashed; padding: 10px;">Your Contibution</h6>
+        <hr>
         {% for p in plasma %}
         <ul>
             <li class="sidecard">
@@ -19,21 +20,19 @@
             </li>
         </ul>
         {% endfor %}
+        <p style="margin: 20px;">No more contributions</p>
     </div>
     <div class="main_content">
         <div class="header">
             <div class="container" style="margin-left: 10px !important; padding: 25px;">
                 <div class="col-12">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio asperiores in iste deleniti
-                    quibusdam, animi
-                    illo molestiae accusantium, qui sunt rerum amet similique quo? Obcaecati atque quisquam iusto porro.
-                    Eos?
+                    <h4>Plasma Resources</h4>
                 </div>
             </div>
         </div>
         {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="margin: 20px;">
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="margin: 20px; width: 80%;">
             <strong>{{ message|safe }}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>

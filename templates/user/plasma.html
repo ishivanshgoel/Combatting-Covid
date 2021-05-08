@@ -4,7 +4,8 @@
 
 <div class="wrapper">
     <div class="sidebar">
-        <h2 id="headingSidebar">Your Added Resources</h2>
+        <h6 style="margin: 10px; border: 2px black dashed; padding: 10px;">Your Contibution</h6>
+        <hr>
         {% for p in plasma %}
         <ul>
             <li class="sidecard">
@@ -19,27 +20,25 @@
             </li>
         </ul>
         {% endfor %}
+        <p style="margin: 20px;">No more contributions</p>
     </div>
     <div class="main_content">
         <div class="header">
-
-            <div class="contact-info">
-                <h2>Plasma Donor</h2>
-                <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat excepturi debitis delectus omnis
-                    hic cum vel architecto minus ducimus soluta a pariatur dolores, magnam reiciendis voluptatum
-                    deleniti esse quod ipsa.!!</h6>
+            <div class="container" style="margin-left: 10px !important; padding: 25px;">
+                <div class="col-12">
+                    <h4>Plasma Resources</h4>
+                </div>
             </div>
-            {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="margin: 20px;">
-                <strong>{{ message|safe }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
-            {% endif %}
         </div>
-        <div class="info">
-
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="margin: 20px; width: 80%;">
+            <strong>{{ message|safe }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="info" style="margin: 30px;">
             <form class="contact-form" method="POST" action="/user/plasma">
                 {% csrf_token %}
                 <!-- name -->
@@ -88,29 +87,12 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10 py-3">
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="submit" class="btn btn-warning">Submit</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-    <!-- modal -->
-    <div id="modifyModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 <script src='../../static/js/custom.js'></script>
 

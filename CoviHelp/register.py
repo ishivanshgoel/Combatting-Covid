@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 # default User Model
 from django.contrib.auth.models import User
@@ -30,10 +31,13 @@ def register(request):
                 userInfo = UserInfo()
                 userInfo.user = user
                 userInfo.save()
-                return HttpResponse('User Created')
+                messages.success(request, 'Registered Successfully!! Headover to Login...')
+                return render(request, "public/index.html")
             else:
-                return HttpResponse('User already exists')
+                messages.warning(request, 'User already exists!! Headover to Login...')
+                return render(request, "public/index.html")
         else:
-            return HttpResponse('Bad Request')
+            messages.error(request, 'Bad Request')
+            return render(request, "public/index.html")
     else:
         return HttpResponseRedirect("/")

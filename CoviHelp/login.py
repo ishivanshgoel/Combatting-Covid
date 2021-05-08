@@ -76,7 +76,6 @@ def plasma(request):
             p.contact = request.POST['contact']
             p.id = gen_id(p.user, p.name, p.state, 'plasma', p.contact)
             p.save()
-            print(p)
             messages.success(request, 'Thankyou for sharing the information.')
         except:
             messages.error(request, 'Error!!')

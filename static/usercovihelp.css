@@ -1,0 +1,231 @@
+.bg-light {
+    background-color: orange!important;
+}
+
+  @media (min-width: 600px) {
+
+    .wrapper {
+      display: flex;
+      position: relative
+    }
+
+    .wrapper .sidebar {
+      width: 250px;
+      height: 100%;
+      background: orange;
+      padding: 30px 0px;
+      position: fixed;
+      overflow: auto;
+    }
+
+    .wrapper .sidebar h2 {
+      color: #000;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 30px
+    }
+
+    .wrapper .sidebar ul li {
+      padding: 15px;
+      border-bottom: 1px solid #000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.05)
+    }
+
+    .wrapper .sidebar ul li a {
+      color: #000;
+      display: block
+    }
+
+    .wrapper .sidebar ul li a .fa {
+      width: 25px
+    }
+
+    .wrapper .sidebar ul li:hover {
+      background-color: #7d777717
+    }
+
+    .wrapper .sidebar ul li:hover a {
+      color: #fff
+    }
+
+    .wrapper .sidebar .social_media {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex
+    }
+
+    .wrapper .sidebar .social_media a {
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      line-height: 45px;
+      text-align: center;
+      margin: 0 5px;
+      color: #bdb8d7;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px
+    }
+
+    .wrapper .main_content {
+      width: 100%;
+      margin-left: 250px;
+      position: fixed;
+    }
+
+    .wrapper .main_content .header {
+      /* padding: 20px; */
+      background: orange;
+      color: #000;
+      border-bottom: 1px solid #e0e4e8
+    }
+
+    .wrapper .main_content .info {
+      /* margin: 20px; */
+      color: #717171;
+      line-height: 25px
+    }
+
+    .wrapper .main_content .info div {
+      margin-bottom: 20px
+    }
+
+    .custombtngrp {
+      zoom: 0.7;
+    }
+
+    .sidecard {
+      /* background-color: #d68305; */
+      margin-left: -5vh;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 1px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+
+    /*Big smartphones [426px -> 600px]*/
+    .sidebar::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .wrapper {
+      display: flex;
+      position: relative
+    }
+
+    .wrapper .sidebar {
+      box-shadow: 0px 4px 0.2pc 0px;
+      width: 92%;
+      height: 40vh;
+      background: orange;
+      padding: 2%;
+      position: absolute;
+      overflow: auto;
+      z-index: 999;
+      zoom: 0.7;
+      margin: 4%;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 1px;
+    }
+
+    .wrapper .sidebar h2 {
+      color: #000;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 30px
+    }
+
+    .wrapper .sidebar ul li {
+      padding: 15px;
+      border-bottom: 1px solid #000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.05)
+    }
+
+    .wrapper .sidebar ul li a {
+      color: #000;
+      display: block
+    }
+
+    .wrapper .sidebar ul li a .fa {
+      width: 25px
+    }
+
+    .wrapper .sidebar ul li:hover {
+      background-color: #7d777717
+    }
+
+    .wrapper .sidebar ul li:hover a {
+      color: #fff
+    }
+
+    .wrapper .sidebar .social_media {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex
+    }
+
+    .wrapper .sidebar .social_media a {
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      line-height: 45px;
+      text-align: center;
+      margin: 0 5px;
+      color: #bdb8d7;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px
+    }
+
+    .wrapper .main_content {
+      padding: 4%;
+      width: 100%;
+      position: absolute;
+      margin-left: 0px;
+      margin-top: 30vh;
+    }
+
+    .wrapper .main_content .header {
+      /* padding: 20px; */
+      background: orange;
+      color: #000;
+      box-shadow: 0px 4px 0.2pc 0px;
+
+      border-bottom: 1px solid #e0e4e8
+    }
+
+    .wrapper .main_content .info {
+      margin: 20px;
+      color: #717171;
+      line-height: 25px
+    }
+
+    .wrapper .main_content .info div {
+      margin-bottom: 20px
+    }
+
+    .custombtngrp {
+      zoom: 0.7;
+    }
+
+    .sidecard {
+      /* background-color: #d68305; */
+      margin-left: -5vh;
+    }
+
+    #headingSidebar {
+      padding: 2%;
+      box-shadow: inset 0px 2px 10px 0px white;
+    }
+  }

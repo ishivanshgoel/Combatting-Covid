@@ -32,7 +32,6 @@ def pharma(request):
         drugs=[]
         for med in resources:
             med=med.available_drugs.strip("[]").split(",")
-            print(med)
             drugs.append(med)
         return render(request, "public/pharmaView.html", {
             "cleaned_resources": zip(resources, drugs)

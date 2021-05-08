@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,10 +75,23 @@ WSGI_APPLICATION = 'covid.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+credentials_json = open(f'{BASE_DIR}/credentials.json',)
+credentials = json.load(credentials_json)
+COLLECTION = credentials['COLLECTION']
+USERNAME = credentials['USERNAME']
+PASSWORD = credentials['PASSWORD']
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'NAME': f'{COLLECTION}',
+        'CLIENT': {
+                'host': f'mongodb+srv://{USERNAME}:{PASSWORD}@cluster0.vvpfe.mongodb.net/vHelp?retryWrites=true&w=majority',
+                'username': f'{USERNAME}',
+                'password': f'{PASSWORD}',
+                'authSource': f'{COLLECTION}',
+                'authMechanism': 'SCRAM-SHA-1'
+            },
     }
 }
 

@@ -1,5 +1,5 @@
 .bg-light {
-    background-color: #FF9B00!important;
+    background-color: orange!important;
 }
 
   @media (min-width: 600px) {
@@ -12,7 +12,7 @@
     .wrapper .sidebar {
       width: 250px;
       height: 100%;
-      background: #FF9B00;
+      background: orange;
       padding: 30px 0px;
       position: fixed;
       overflow: auto;
@@ -78,7 +78,7 @@
 
     .wrapper .main_content .header {
       /* padding: 20px; */
-      background: #d68305;
+      background: orange;
       color: #000;
       border-bottom: 1px solid #e0e4e8
     }

@@ -70,3 +70,12 @@ class Plasma(models.Model):
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.contact}'
+
+#Report
+
+class Report(models.Model):
+    item = models.CharField(max_length=200)
+    comments = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f'{self.item}'

@@ -24,5 +24,7 @@ urlpatterns = [
 
     path('register', register.register, name='register'),
 
+    path('report/<str:id>',views.report, name="report"),
+
     path('helper/districts/', login.getDistricts, name='getdistricts')
 ]

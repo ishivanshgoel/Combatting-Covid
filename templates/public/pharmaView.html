@@ -6,7 +6,7 @@
     {% for resource, medicines in cleaned_resources %}
     <div class="accordion-item" style="margin:20px">
         <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            <button class="accordion-button collapsed ms-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo-{{ resource.id }}" aria-expanded="false"
                 aria-controls="collapseTwo-{{ resource.id }}">
                 {{ resource.name }} - {{ resource.contact }} - {% if resource.verified == True %}
@@ -15,6 +15,7 @@
                 {% if resource.verified == False %}
                 <span class="badge bg-info text-dark" style="margin: 3px;">Not Verified</span>
                 {% endif %}
+
             </button>
         </h2>
         <div id="collapseTwo-{{ resource.id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -60,6 +61,35 @@
                     style="margin-left: 20px; margin-right: 20px;">Address</span>
                 {{ resource.address }}
             </p>
+            <button type="button" class="btn btn-sm btn-danger ms-4 mb-2" data-bs-toggle="modal"
+                data-bs-target="#reportModal">Report</button>
+            <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="reportModalLabel">Report</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{% url 'report' resource.id %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" name="comments" placeholder="Leave a comment here"
+                                            id="reportTextArea" style="height: 150px"></textarea>
+                                        <label for="reportTextArea">Comments</label>
+                                    </div>
+                                    <input type="hidden" name="ModelType" value="Pharma">
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     {% endfor %}

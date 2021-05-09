@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .models import Oxygen, Pharma, Plasma, Hospital
+from .models import Oxygen, Pharma, Plasma, Hospital, Report
 
 from .Helpers.Statesdata import Statesdata
 import json
@@ -66,3 +66,14 @@ def plasma(request):
         st = Statesdata()
         states = st.getStates()
         return render(request, "public/plasma.html", {'states': states})
+
+def report(request, id):
+    comments = request.POST['comments']
+    modelType = request.POST['ModelType']
+    if modelType == "Oxygen":
+        print(Oxygen.objects.get(id=id))
+    elif modelType == "Pharma":
+        print(Pharma.objects.get(id=id))
+    elif modelType == "Plasma":
+        print(Plasma.objects.get(id=id))
+    return HttpResponse("working")

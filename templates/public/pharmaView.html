@@ -1,12 +1,19 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="margin: 20px;">
+    <strong>{{ message|safe }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
 <div class="accordion" id="accordionExample">
     {% for resource, medicines in cleaned_resources %}
     <div class="accordion-item" style="margin:20px">
         <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            <button class="accordion-button collapsed ms-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo-{{ resource.id }}" aria-expanded="false"
                 aria-controls="collapseTwo-{{ resource.id }}">
                 {{ resource.name }} - {{ resource.contact }} - {% if resource.verified == True %}
@@ -15,6 +22,7 @@
                 {% if resource.verified == False %}
                 <span class="badge bg-info text-dark" style="margin: 3px;">Not Verified</span>
                 {% endif %}
+
             </button>
         </h2>
         <div id="collapseTwo-{{ resource.id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -41,25 +49,58 @@
                     </table>
                 </div>
             </div>
-            <table class="table" style="margin-left: 20px; margin-right: 20px;">
-                <thead>
-                    <tr>
-                        <th>Drugs Available</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for medicine in medicines %}
-                    <tr>
-                        <td><span class="badge bg-success">Available</span> - {{ medicine }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <p>
-                <span class="badge rounded-pill bg-success"
-                    style="margin-left: 20px; margin-right: 20px;">Address</span>
-                {{ resource.address }}
-            </p>
+            <div class="accordion-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" colspan="2">Drugs Available</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for medicine in medicines %}
+                            <tr>
+                                <td><span class="badge bg-success">Available</span></td>
+                                <td>{{ medicine }}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td><span class="badge rounded-pill bg-success">Address</span></td>
+                                <td>{{ resource.address }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-danger ms-4 mb-2 rounded-pill" data-bs-toggle="modal"
+                data-bs-target="#reportModal"><i class="info icon"></i> Report</button>
+            <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="reportModalLabel"><i class="info icon"></i> Report</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{% url 'report' resource.id %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" name="comments" placeholder="Leave a comment here"
+                                            id="reportTextArea" style="height: 150px"></textarea>
+                                        <label for="reportTextArea">Comments</label>
+                                    </div>
+                                    <input type="hidden" name="ModelType" value="Pharma">
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     {% endfor %}

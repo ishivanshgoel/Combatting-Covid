@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': f'{COLLECTION}',
         'CLIENT': {
-                'host': f'mongodb+srv://{USERNAME}:{PASSWORD}@cluster0.vvpfe.mongodb.net/vHelp?retryWrites=true&w=majority',
+                'host': f'mongodb+srv://{USERNAME}:{PASSWORD}@cluster0.33p80.mongodb.net/covidHelp?retryWrites=true&w=majority',
                 'username': f'{USERNAME}',
                 'password': f'{PASSWORD}',
                 'authSource': f'{COLLECTION}',

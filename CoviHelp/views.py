@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 
-from .models import Oxygen, Pharma, Plasma, Hospital
+from .models import Oxygen, Pharma, Plasma, Hospital, Report
 
 from .Helpers.Statesdata import Statesdata
 import json
@@ -66,3 +67,25 @@ def plasma(request):
         st = Statesdata()
         states = st.getStates()
         return render(request, "public/plasma.html", {'states': states})
+
+def report(request, id):
+    if request.method == 'POST':
+        try:
+            r = Report()
+            r.comments = request.POST['comments']
+            modelType = request.POST['ModelType']
+            if modelType == "Oxygen":
+                r.item = Oxygen.objects.get(id=id)
+            elif modelType == "Pharma":
+                r.item = Pharma.objects.get(id=id)
+            elif modelType == "Plasma":
+                r.item = Plasma.objects.get(id=id)
+            r.save()
+            messages.success(request, 'Comment Submitted!')
+            return redirect(request.META.get('HTTP_REFERER'))
+        except:
+            messages.warning(request, 'Error!!')
+            return render(request, "public/index.html")
+    else:
+        messages.warning(request, 'Method Not Allowed!')
+        return render(request, "public/index.html")

@@ -4,12 +4,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # User Models for Information
-
-
 class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     verified = models.BooleanField(default=False)
-    contact_name = models.CharField(max_length=20)
+    contact_name = models.CharField(max_length=50)
     mobile = models.CharField(max_length=10)
 
     def __str__(self):
@@ -19,10 +17,10 @@ class UserInfo(models.Model):
 # Hospital Model
 class Hospital(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
     contact = models.CharField(max_length=10)
-    state = models.CharField(max_length=10)
-    city = models.CharField(max_length=20)
+    state = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
     verified = models.BooleanField(default=False)
 
@@ -30,10 +28,10 @@ class Hospital(models.Model):
 # Oxygen Supplier Model
 class Oxygen(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
     contact = models.CharField(max_length=10)
-    state = models.CharField(max_length=10)
-    city = models.CharField(max_length=20)
+    state = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
     verified = models.BooleanField(default=False)
 
@@ -44,10 +42,10 @@ class Oxygen(models.Model):
 # Medicine Supplier Model
 class Pharma(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
     contact = models.CharField(max_length=10, default="")
-    state = models.CharField(max_length=10, default="")
-    city = models.CharField(max_length=20, default="")
+    state = models.CharField(max_length=50, default="")
+    city = models.CharField(max_length=50, default="")
     address = models.TextField(blank=True, default="")
     available_drugs = models.TextField(blank=True)
     verified = models.BooleanField(default=False)
@@ -61,10 +59,10 @@ class Pharma(models.Model):
 
 class Plasma(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=20)
-    state = models.CharField(max_length=10)
-    city = models.CharField(max_length=20)
-    donortype = models.CharField(max_length=10)
+    name = models.CharField(max_length=50)
+    state = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    donortype = models.CharField(max_length=50)
     contact = models.CharField(max_length=10)
     verified = models.BooleanField(default=False)
 
@@ -72,7 +70,6 @@ class Plasma(models.Model):
         return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.contact}'
 
 #Report
-
 class Report(models.Model):
     item = models.CharField(max_length=200)
     comments = models.CharField(max_length=500)

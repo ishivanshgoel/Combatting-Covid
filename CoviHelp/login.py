@@ -108,11 +108,7 @@ def oxygen(request):
             Oxy.city = request.POST['city']
             Oxy.contact = request.POST['contact']
             Oxy.address = request.POST['address']
-<<<<<<< HEAD
-            Oxy.id = gen_id(Oxy.user, Oxy.name, Oxy.state, 'oxygen', Oxy.contact)
-=======
             Oxy.id = ut.gen_id(Oxy.user, Oxy.name, Oxy.state, 'oxygen', Oxy.contact)
->>>>>>> 0f005ae91dc8bfbd8febb1bcaf07bcb5d854f1e9
             Oxy.save()
             messages.success(request, 'Thankyou for sharing the information.')
         except:
@@ -153,11 +149,7 @@ def pharma(request):
             p.contact = request.POST['contact']
             p.address = request.POST['address']
             p.available_drugs = request.POST.getlist('checks[]')
-<<<<<<< HEAD
-            p.id = gen_id(p.user, p.name, p.state, 'pharma', p.contact)
-=======
             p.id = ut.gen_id(p.user, p.name, p.state, 'pharma', p.contact)
->>>>>>> 0f005ae91dc8bfbd8febb1bcaf07bcb5d854f1e9
             p.save()
             messages.success(request, 'Thankyou for sharing the information.')
         except:

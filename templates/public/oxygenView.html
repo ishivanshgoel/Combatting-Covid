@@ -48,10 +48,17 @@
           </table>
         </div>
       </div>
-      <p>
-        <span class="badge rounded-pill bg-success" style="margin-left: 20px; margin-right: 20px;">Address</span>
-        {{ resource.address }}
-      </p>
+      <div class="accordion-body">
+        <div class="table-responsive">
+            <table class="table">
+                    <tr>
+                        <td><span class="badge rounded-pill bg-success">Address</span></td>
+                        <td>{{ resource.address }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
       <button type="button" class="btn btn-sm btn-danger ms-4 mb-2 rounded-pill" data-bs-toggle="modal"
         data-bs-target="#reportModal"><i class="info icon"></i>  Report</button>
       <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">

@@ -11,15 +11,19 @@ from .models import Plasma, Oxygen, Pharma
 
 # helper functions
 from .Helpers.Statesdata import Statesdata
+from .Helpers.Utilities import Utilities
+from .Helpers.Data import Data
 import json
 import datetime
 
 # helpers
-available_drugs = ["Tocilizumab", "Remdesivir",
-                       "Favipiravir", "Fabiflu 200 MG"]
+dt = Data()
+available_drugs = dt.available_drugs() 
     
 st = Statesdata()
 states = st.getStates()
+ut = Utilities()
+
 
 # convert time to integer
 def to_str(dt_time):
@@ -75,7 +79,7 @@ def plasma(request):
             p.city = request.POST['city']
             p.donortype = request.POST['donortype']
             p.contact = request.POST['contact']
-            p.id = gen_id(p.user, p.name, p.state, 'plasma', p.contact)
+            p.id = ut.gen_id(p.user, p.name, p.state, 'plasma', p.contact)
             p.save()
             messages.success(request, 'Thankyou for sharing the information.')
         except:
@@ -104,7 +108,7 @@ def oxygen(request):
             Oxy.city = request.POST['city']
             Oxy.contact = request.POST['contact']
             Oxy.address = request.POST['address']
-            Oxy.id = gen_id(Oxy.user, Oxy.name, Oxy.state, 'oxygen', Oxy.contact)
+            Oxy.id = ut.gen_id(Oxy.user, Oxy.name, Oxy.state, 'oxygen', Oxy.contact)
             Oxy.save()
             messages.success(request, 'Thankyou for sharing the information.')
         except:
@@ -145,7 +149,7 @@ def pharma(request):
             p.contact = request.POST['contact']
             p.address = request.POST['address']
             p.available_drugs = request.POST.getlist('checks[]')
-            p.id = gen_id(p.user, p.name, p.state, 'pharma', p.contact)
+            p.id = ut.gen_id(p.user, p.name, p.state, 'pharma', p.contact)
             p.save()
             messages.success(request, 'Thankyou for sharing the information.')
         except:

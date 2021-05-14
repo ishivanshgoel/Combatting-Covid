@@ -8,6 +8,5 @@ CoviHelp/migrations
 db.sqlite3
 *.sqlite3
 
-credentials.json
-
 .vscode
+credentials.json

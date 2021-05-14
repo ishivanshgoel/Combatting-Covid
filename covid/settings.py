@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-rl$b2)k4^+t21(^8r8z=yrm70e(la81jz6qq6_sz3t+5ag$shs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','combattingcovid.herokuapp.com']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,7 +87,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': f'{COLLECTION}',
         'CLIENT': {
-                'host': f'mongodb+srv://{USERNAME}:{PASSWORD}@cluster0.vvpfe.mongodb.net/vHelp?retryWrites=true&w=majority',
+                'host': f'mongodb+srv://{USERNAME}:{PASSWORD}@cluster0.33p80.mongodb.net/covidHelp?retryWrites=true&w=majority',
                 'username': f'{USERNAME}',
                 'password': f'{PASSWORD}',
                 'authSource': f'{COLLECTION}',
@@ -132,7 +133,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -142,3 +146,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+

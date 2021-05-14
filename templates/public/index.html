@@ -1,10 +1,8 @@
 {% extends 'layout.html' %}
-
 {% block body %}
 
 <style>
     .publicMainBody {
-        display: flex;
         justify-content: center;
         align-items: center;
     }
@@ -44,6 +42,43 @@
     .btn-space{
         margin-right: 5px;
     }
+    .whatsapp-container{
+        width: 40vw;
+        margin:5% auto;
+        margin-top: 3%;
+    }
+    .whatsapp-btn{
+        background-color: #01be4a;
+        color:white;
+    }
+
+    footer{
+        background-color:orange;
+        margin-bottom: -60px;
+    }
+    footer .copyright-div{
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    footer i{
+        color:rgba(0, 0, 0, 0.6);
+    }
+    .home-background{
+        width:100%;
+        background:linear-gradient(to right, rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url("/static/home-background.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding:2%;
+    }
+    .resource-cards{
+        background-color: rgb(255, 174, 0);
+        color:white;
+    }
+    .resource-cards:hover{
+        background-color: rgb(224, 153, 0);
+        color:white;
+    }
+
 </style>
 {% if messages %}
 {% for message in messages %}
@@ -54,79 +89,67 @@
 {% endfor %}
 {% endif %}
 <div class="publicMainBody">
-    <div class="container">
-        <div class="publicMainBodyLogo">
-            <img class="publicMainBodyLogoImg" src="/static/coviHelp.png" />
-        </div>
-        <div class="publicMainBodyText">
-            <h3><span class="badge bg-secondary">Browse Resources</span></h3>
-        </div>
-        <div class="publicMainBodyButtons" style="margin: 40px;">
-            <div class="btn-group" role="group">
-                <a href="{% url 'oxygen' %}" class="btn btn-warning"><i class="external alternate icon"></i> Oxygen</a>
-                <a href="{% url 'plasma' %}" class="btn btn-warning"><i class="external alternate icon"></i> Plasma</a>
-                <a href="{% url 'pharma' %}" class="btn btn-warning"><i class="external alternate icon"></i> Pharma</a>
+    <div class="home-background container-fluid">
+        <div >
+            <div class="publicMainBodyLogo">
+                <img class="publicMainBodyLogoImg" src="/static/combattingcovid.png" />
             </div>
         </div>
-        <!-- https://chat.whatsapp.com/<group_link> -->
-        <h3 class="publicMainBodyHeading"><u>State Wise Whatsapp Group</u></h3>
-        <div class="btn-group btn-group-sm publicMainBodyButtons publicMainBodyButtonsMany" role="group" style="margin: 30px;">
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> UP</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> TN</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> HR</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> PB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> DL</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> MH</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> JK</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> WB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> HR</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> MH</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> DL</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> PB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> UP</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> TN</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> HR</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> PB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> DL</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> MH</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> JK</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> WB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> HR</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> MH</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> DL</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> PB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> UP</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> TN</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> HR</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> PB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> DL</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> MH</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> JK</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> WB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> HR</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> MH</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> DL</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> PB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> UP</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> TN</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> HR</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> PB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> DL</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> MH</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> JK</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> WB</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> HR</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> MH</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> DL</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> PB</button>
-          </div>
-        <div>
-        <h3 class="publicMainBodyHeading"><u>Social Handles</u></h3>
-        <div class="btn-group btn-group-sm publicMainBodyButtons" role="group" style="margin: 30px;">
-            <button type="button" class="btn btn-secondary btn-space"><i class="big instagram icon"></i> Instagram</button>
-            <button type="button" class="btn btn-success btn-space"><i class="big whatsapp square icon"></i> Whatsapp Group</button>
+    
+        <div class="publicMainBodyText">
+            <h3><span class="badge bg-secondary p-2">Browse Resources</span></h3>
+        </div>
+        <div class="d-flex justify-content-center mt-2">
+            <a href="{% url 'oxygen' %}" class="card mb-3 p-3 m-4 resource-cards" style="width: 100px;">
+                <h5 class="card-title text-center">Oxygen</h5>
+            </a>
+            <a href="{% url 'plasma' %}" class="card mb-3 p-3 m-4 resource-cards" style="width: 100px;">
+                <h5 class="card-title text-center">Plasma</h5>
+            </a>
+            <a href="{% url 'pharma' %}" class="card mb-3 p-3 m-4 resource-cards" style="width: 100px;">
+                <h5 class="card-title text-center">Pharma</h5>
+            </a>
+        </div>
+    </div>
+        <div class="whatsapp-container">
+            <h3 class="mb-4 text-center">Join State Wise Whatsapp Groups </h3>
+            <div class="input-group mb-3">
+                <select class="custom-select form-control py-2" id="selectWhatsappGroups">
+                </select>
+                <div class="input-group-append">
+                    <a class="btn btn-outline-secondary py-2 whatsapp-btn" type="button" id="joinWhatsappButton"><i class="large whatsapp icon"></i>Join Whatsapp</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<!-- Footer -->
+<footer class="page-footer font-small pt-4">
+    <div class="container py-3">
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1" href="https://www.instagram.com/combatting.covid/" target="_blank">
+                    <i class="instagram icon big"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-dribbble mx-1" href="https://chat.whatsapp.com/BxHYOtH2FZcLcyIc9lhZaT" target="_blank">
+                    <i class="whatsapp icon big"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-dribbble mx-1" href="https://chat.whatsapp.com/Hwvph70EYGA7KPLmMyzE8s" target="_blank">
+                    <i class="whatsapp icon big"> </i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <div class="footer-copyright text-center py-3 copyright-div">© 2020 Copyright:
+         Combatting Covid
+    </div>
+</footer>
+<!-- Footer -->
 <script src='../../static/js/custom.js'></script>
+<script src='../../static/js/whatsappGroups.js'></script>
 {% endblock body %}

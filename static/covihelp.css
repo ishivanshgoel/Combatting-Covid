@@ -14,3 +14,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.navbarCustom {
 .inputSearchBarCustom {
     padding: 3%;
 }
+
+.navbar-logo{
+    margin:0 ;
+}

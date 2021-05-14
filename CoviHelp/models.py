@@ -23,6 +23,7 @@ class Hospital(models.Model):
     city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
     verified = models.BooleanField(default=False)
+    verified_at = models.DateTimeField('verified', auto_now=True)
 
 
 # Oxygen Supplier Model
@@ -34,9 +35,10 @@ class Oxygen(models.Model):
     city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
     verified = models.BooleanField(default=False)
+    verified_at = models.DateTimeField('verified', auto_now=True)
 
     def __str__(self):
-        return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.address}'
+        return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.address} - {self.verified_at}'
 
 
 # Medicine Supplier Model
@@ -49,9 +51,10 @@ class Pharma(models.Model):
     address = models.TextField(blank=True, default="")
     available_drugs = models.TextField(blank=True)
     verified = models.BooleanField(default=False)
+    verified_at = models.DateTimeField('verified', auto_now=True)
 
     def __str__(self):
-        return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.address} -{self.available_drugs}'
+        return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.address} -{self.available_drugs} - {self.verified_at}'
     ##available_drugs = models.ArrayField()
 
 # Plasma Donor
@@ -65,14 +68,16 @@ class Plasma(models.Model):
     donortype = models.CharField(max_length=50)
     contact = models.CharField(max_length=10)
     verified = models.BooleanField(default=False)
+    verified_at = models.DateTimeField('verified', auto_now=True)
 
     def __str__(self):
-        return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.contact}'
+        return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.contact} - {self.verified_at}'
 
 #Report
 class Report(models.Model):
     item = models.CharField(max_length=200)
     comments = models.CharField(max_length=500)
+    reported_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.item}'

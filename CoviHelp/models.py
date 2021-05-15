@@ -1,4 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+from django import forms
 
 # default User Model
 from django.contrib.auth.models import User
@@ -23,7 +25,7 @@ class Hospital(models.Model):
     city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
     verified = models.BooleanField(default=False)
-    verified_at = models.DateTimeField('verified', auto_now=True)
+    verified_at = models.DateTimeField(blank=True)
 
 
 # Oxygen Supplier Model
@@ -35,10 +37,15 @@ class Oxygen(models.Model):
     city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
     verified = models.BooleanField(default=False)
-    verified_at = models.DateTimeField('verified', auto_now=True)
+    verified_at = models.DateTimeField(blank=True)
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.address} - {self.verified_at}'
+    
+    def clean(self):
+        if self.verified and self.verified_at is None:
+            raise ValidationError('Verification time is required')
+
 
 
 # Medicine Supplier Model
@@ -51,15 +58,17 @@ class Pharma(models.Model):
     address = models.TextField(blank=True, default="")
     available_drugs = models.TextField(blank=True)
     verified = models.BooleanField(default=False)
-    verified_at = models.DateTimeField('verified', auto_now=True)
+    verified_at = models.DateTimeField(blank=True)
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.address} -{self.available_drugs} - {self.verified_at}'
-    ##available_drugs = models.ArrayField()
+
+    def clean(self):
+        if self.verified and self.verified_at is None:
+            raise ValidationError('Verification time is required')
+
 
 # Plasma Donor
-
-
 class Plasma(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
@@ -68,10 +77,15 @@ class Plasma(models.Model):
     donortype = models.CharField(max_length=50)
     contact = models.CharField(max_length=10)
     verified = models.BooleanField(default=False)
-    verified_at = models.DateTimeField('verified', auto_now=True)
+    verified_at = models.DateTimeField(blank=True)
+    blood_group = models.CharField(max_length=10)
 
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.contact} - {self.verified_at}'
+
+    def clean(self):
+        if self.verified and self.verified_at is None:
+            raise ValidationError('Verification time is required')
 
 #Report
 class Report(models.Model):

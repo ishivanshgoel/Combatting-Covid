@@ -17,7 +17,7 @@
                 data-bs-target="#collapseTwo-{{ resource.id }}" aria-expanded="false"
                 aria-controls="collapseTwo-{{ resource.id }}">
                 {{ resource.name }} - {{ resource.contact }} - {% if resource.verified == True %}
-                <span class="badge bg-success" style="margin: 3px;">Verified</span>
+                <span class="badge bg-success" style="margin: 3px;">Verified on - {{ resource.verified_at|date:"d M Y" }} at {{ resource.verified_at|date:"h : m" }}</span>
                 {% endif %}
                 {% if resource.verified == False %}
                 <span class="badge bg-info text-dark" style="margin: 3px;">Not Verified</span>

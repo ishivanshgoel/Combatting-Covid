@@ -79,6 +79,7 @@ def plasma(request):
             p.city = request.POST['city']
             p.donortype = request.POST['donortype']
             p.contact = request.POST['contact']
+            p.blood_group = request.POST['bloodgroup']
             p.id = ut.gen_id(p.user, p.name, p.state, 'plasma', p.contact)
             p.save()
             messages.success(request, 'Thankyou for sharing the information.')

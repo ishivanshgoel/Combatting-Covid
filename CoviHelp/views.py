@@ -5,7 +5,10 @@ from django.contrib import messages
 from .models import Oxygen, Pharma, Plasma, Hospital, Report
 
 from .Helpers.Statesdata import Statesdata
+from .Helpers.Utilities import Utilities
 import json
+
+ut = Utilities()
 
 # Create your views here.
 def index(request):
@@ -73,6 +76,7 @@ def report(request, id):
         try:
             r = Report()
             r.comments = request.POST['comments']
+            r.id = ut.gen_id('user-name', r.comments[0], 'state', 'report','contact')
             modelType = request.POST['ModelType']
             if modelType == "Oxygen":
                 r.item = Oxygen.objects.get(id=id)

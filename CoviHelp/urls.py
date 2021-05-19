@@ -10,7 +10,7 @@ urlpatterns = [
 
     
     path('oxygen', views.oxygen, name="oxygen"),
-    path('hospitals', views.hospitals, name='hospitals'),
+    path('hospital', views.hospitals, name='hospital'),
     path('pharma', views.pharma, name='pharma'),
     path('plasma', views.plasma, name='plasma'),
 

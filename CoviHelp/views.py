@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 
-from .models import Oxygen, Pharma, Plasma, Hospital, Report
+from .models import Oxygen, Pharma, Plasma, Hospital, Report, Feedback
 
 from .Helpers.Statesdata import Statesdata
 from .Helpers.Utilities import Utilities
@@ -86,6 +86,23 @@ def report(request, id):
                 r.item = Plasma.objects.get(id=id)
             r.save()
             messages.success(request, 'Comment Submitted!')
+            return redirect(request.META.get('HTTP_REFERER'))
+        except:
+            messages.warning(request, 'Error!!')
+            return render(request, "public/index.html")
+    else:
+        messages.warning(request, 'Method Not Allowed!')
+        return render(request, "public/index.html")
+
+def feedback(request):
+    if request.method == 'POST':
+        try:
+            f = Feedback()
+            f.contact = request.POST['contact']
+            f.message = request.POST['message']
+            f.id = ut.gen_id('user-name', f.message[0], 'state', 'feedback','contact')
+            f.save()
+            messages.success(request, 'Message Submitted!')
             return redirect(request.META.get('HTTP_REFERER'))
         except:
             messages.warning(request, 'Error!!')

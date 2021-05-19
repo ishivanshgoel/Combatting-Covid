@@ -6,8 +6,8 @@ from .models import Oxygen, Pharma, Plasma, Hospital, Report
 
 from .Helpers.Statesdata import Statesdata
 from .Helpers.Utilities import Utilities
-import json
 
+st = Statesdata()
 ut = Utilities()
 
 # Create your views here.
@@ -24,7 +24,6 @@ def oxygen(request):
             "resources":resources
         })
     except:
-        st = Statesdata()
         states = st.getStates()
         return render(request, "public/oxygen.html", {'states': states})
 
@@ -41,7 +40,6 @@ def pharma(request):
             "cleaned_resources": zip(resources, drugs)
         })
     except:
-        st = Statesdata()
         states = st.getStates()
         return render(request, "public/pharma.html", {'states': states})
 
@@ -50,11 +48,14 @@ def hospitals(request):
         state = request.GET.getlist('state')[0]
         city = request.GET.getlist('city')[0]
         resources=Hospital.objects.filter(state=state,city=city)
-        return render(request, "public/oxygenView.html", {
-            "resources":resources
+        beds=[]
+        for b in resources:
+            bed=b.bedsavailable.strip("[]").split(",")
+            beds.append(bed)
+        return render(request, "public/hospitalView.html", {
+            "cleaned_resources": zip(resources, beds)
         })
     except:
-        st = Statesdata()
         states = st.getStates()
         return render(request, "public/hospitals.html", {'states': states})
 
@@ -67,7 +68,6 @@ def plasma(request):
             "resources":resources
         })
     except:
-        st = Statesdata()
         states = st.getStates()
         return render(request, "public/plasma.html", {'states': states})
 

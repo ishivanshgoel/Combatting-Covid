@@ -28,7 +28,7 @@ class Hospital(models.Model):
     instagram_post = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
-    
+
     def __str__(self):
         return f'{self.name} - {self.state} - {self.city} - Verified : {self.verified_at} -  Instagram Post: { self.verified_at }'
     
@@ -104,3 +104,12 @@ class Report(models.Model):
 
     def __str__(self):
         return f'{self.item}'
+
+#Feedback
+class Feedback(models.Model):
+    contact = models.CharField(max_length=200)
+    message = models.CharField(max_length=500)
+    reported_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.contact} - {self.message[:30]}...'

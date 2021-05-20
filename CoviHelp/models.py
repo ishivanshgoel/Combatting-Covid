@@ -96,6 +96,24 @@ class Plasma(models.Model):
         if self.verified and self.verified_at is None:
             raise ValidationError('Verification time is required')
 
+# Food
+class Food(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    state = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    contact = models.CharField(max_length=10)
+    instagram_post = models.BooleanField(default=False)
+    verified = models.BooleanField(default=False)
+    verified_at = models.DateTimeField(blank=True)
+
+    def __str__(self):
+        return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.verified_at} - {self.instagram_post}'
+
+    def clean(self):
+        if self.verified and self.verified_at is None:
+            raise ValidationError('Verification time is required')
+
 #Report
 class Report(models.Model):
     item = models.CharField(max_length=200)

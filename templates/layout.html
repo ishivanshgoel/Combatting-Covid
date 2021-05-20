@@ -42,7 +42,7 @@
             <a class="nav-link" href="{% url 'oxygen' %}"><i class="bed icon"></i> Oxygen</a>
           </li>
           <!-- <li class="nav-item">
-            <a class="nav-link" href="{% url 'hospitals' %}">Hospitals</a>
+            <a class="nav-link" href="{% url 'hospital' %}">Hospitals</a>
           </li> -->
           <li class="nav-item">
             <a class="nav-link" href="{% url 'pharma' %}"><i class="pills icon"></i> Pharma</a>
@@ -57,6 +57,10 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="modal" data-bs-target="#registerModel" data-bs-whatever="@mdo"
               style="cursor:pointer"><i class="sign in alternate icon"></i> Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#messageModel" data-bs-whatever="@mdo"
+              style="cursor:pointer"><i class="facebook messenger icon"></i> Message</a>
           </li>
         </ul>
       </div>
@@ -122,6 +126,37 @@
       </div>
     </div>
   </div>
+
+  {% comment %} Message Model {% endcomment %}
+  <div class="modal fade" id="messageModel" tabindex="-1" aria-labelledby="messageModelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="messageModelLabel">Message - Request/ Feedback</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'feedback' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Contact</label>
+              <input type="text" class="form-control" name="contact">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="3" placeholder="Enter Message" name="message"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
   {% block body %}
   {% endblock body %}
   <br><br><br>

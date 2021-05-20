@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 
-from .models import Oxygen, Pharma, Plasma, Hospital, Report
+from .models import Oxygen, Pharma, Plasma, Hospital, Report, Feedback
 
 from .Helpers.Statesdata import Statesdata
 from .Helpers.Utilities import Utilities
-import json
 
+st = Statesdata()
 ut = Utilities()
 
 # Create your views here.
@@ -24,7 +24,6 @@ def oxygen(request):
             "resources":resources
         })
     except:
-        st = Statesdata()
         states = st.getStates()
         return render(request, "public/oxygen.html", {'states': states})
 
@@ -41,7 +40,6 @@ def pharma(request):
             "cleaned_resources": zip(resources, drugs)
         })
     except:
-        st = Statesdata()
         states = st.getStates()
         return render(request, "public/pharma.html", {'states': states})
 
@@ -50,11 +48,14 @@ def hospitals(request):
         state = request.GET.getlist('state')[0]
         city = request.GET.getlist('city')[0]
         resources=Hospital.objects.filter(state=state,city=city)
-        return render(request, "public/oxygenView.html", {
-            "resources":resources
+        beds=[]
+        for b in resources:
+            bed=b.bedsavailable.strip("[]").split(",")
+            beds.append(bed)
+        return render(request, "public/hospitalView.html", {
+            "cleaned_resources": zip(resources, beds)
         })
     except:
-        st = Statesdata()
         states = st.getStates()
         return render(request, "public/hospitals.html", {'states': states})
 
@@ -67,7 +68,6 @@ def plasma(request):
             "resources":resources
         })
     except:
-        st = Statesdata()
         states = st.getStates()
         return render(request, "public/plasma.html", {'states': states})
 
@@ -86,6 +86,23 @@ def report(request, id):
                 r.item = Plasma.objects.get(id=id)
             r.save()
             messages.success(request, 'Comment Submitted!')
+            return redirect(request.META.get('HTTP_REFERER'))
+        except:
+            messages.warning(request, 'Error!!')
+            return render(request, "public/index.html")
+    else:
+        messages.warning(request, 'Method Not Allowed!')
+        return render(request, "public/index.html")
+
+def feedback(request):
+    if request.method == 'POST':
+        try:
+            f = Feedback()
+            f.contact = request.POST['contact']
+            f.message = request.POST['message']
+            f.id = ut.gen_id('user-name', f.message[0], 'state', 'feedback','contact')
+            f.save()
+            messages.success(request, 'Message Submitted!')
             return redirect(request.META.get('HTTP_REFERER'))
         except:
             messages.warning(request, 'Error!!')

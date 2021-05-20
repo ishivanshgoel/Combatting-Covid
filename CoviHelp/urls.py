@@ -10,7 +10,7 @@ urlpatterns = [
 
     
     path('oxygen', views.oxygen, name="oxygen"),
-    path('hospitals', views.hospitals, name='hospitals'),
+    path('hospital', views.hospitals, name='hospital'),
     path('pharma', views.pharma, name='pharma'),
     path('plasma', views.plasma, name='plasma'),
 
@@ -29,6 +29,7 @@ urlpatterns = [
     path('register', register.register, name='register'),
 
     path('report/<str:id>',views.report, name="report"),
+    path('feedback', views.feedback, name="feedback"),
 
     path('helper/districts/', login.getDistricts, name='getdistricts')
 ]

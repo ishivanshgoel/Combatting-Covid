@@ -7,7 +7,7 @@ from django.contrib import messages
 from .decorators import allowed_users
 # user info model
 from .models import UserInfo
-from .models import Plasma, Oxygen, Pharma, Instagram
+from .models import Plasma, Oxygen, Pharma, Hospital, Instagram
 
 # helper functions
 from .Helpers.Statesdata import Statesdata
@@ -19,19 +19,11 @@ import datetime
 # helpers
 dt = Data()
 available_drugs = dt.available_drugs() 
+bed_options = dt.bed_options()
     
 st = Statesdata()
 states = st.getStates()
 ut = Utilities()
-
-
-# convert time to integer
-def to_str(dt_time):
-    return str(10000000*dt_time.year + 1000000*dt_time.month + 100000*dt_time.day + 10000*dt_time.hour + 10000*dt_time.minute + 1000*dt_time.second + 100*dt_time.microsecond)
-
-def gen_id(user, name, state, ty,contact):
-    time = datetime.datetime.now()
-    return hash(str(user) + str(name) + str(state) + str(ty) + str(contact) + to_str(time))
 
 
 # all login views
@@ -49,7 +41,7 @@ def loginview(request):
             return HttpResponse('Some Error Occured')
         if u is not None:
             login(request, u)
-            return redirect(user)
+            return redirect(oxygen)
         else:
             messages.warning(request, 'Invalid username/ password')
             return render(request, "public/index.html")
@@ -144,9 +136,36 @@ def hospital(request):
     '''
     user
     '''
-    print(request.user)
-    return render(request, "user/hospital.html")
+    global states
+    hospitals = Hospital.objects.filter(user=request.user)
+    if request.method == 'POST':
+        try:
+            H = Hospital()
+            H.user = request.user
+            H.name = request.POST['name']
+            H.state = request.POST['state']
+            H.city = request.POST['city']
+            H.contact = request.POST['contact']
+            H.address = request.POST['address']
+            H.bedsavailable = request.POST.getlist('checks[]')
+            H.id = ut.gen_id(H.user, H.name, H.state, 'hospital', H.contact)
+            print(H)
+            H.save()
+            messages.success(request, 'Thankyou for sharing the information.')
+        except:
+            messages.error(request, 'Error!!')
+        return render(request, "user/hospital.html", {
+            "states": states,
+            "beds": bed_options,
+            'hospitals' : hospitals
+        })
 
+    else:
+        return render(request, "user/hospital.html", {
+            "states": states,
+            "beds": bed_options,
+            'hospitals' : hospitals
+        })
 
 @login_required
 def pharma(request):
@@ -176,13 +195,14 @@ def pharma(request):
             messages.error(request, 'Error!!')
 
         return render(request, "user/pharma.html", {
-            'states': states,
+            "states": states,
             "drugs":available_drugs,
             "pharma":pharma
         })
     else:
+        print(available_drugs)
         return render(request, "user/pharma.html", {
-            'states': states,
+            "states": states,
             "drugs":available_drugs,
             "pharma":pharma
         })

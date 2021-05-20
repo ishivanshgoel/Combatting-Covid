@@ -25,8 +25,18 @@ class Hospital(models.Model):
     city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
     available = models.BooleanField(default=True)
+    address = models.TextField(blank=True)
+    bedsavailable = models.TextField(blank=True)
+    instagram_post = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
+
+    def __str__(self):
+        return f'{self.name} - {self.state} - {self.city} - Verified : {self.verified_at} -  Instagram Post: { self.verified_at }'
+    
+    def clean(self):
+        if self.verified and self.verified_at is None:
+            raise ValidationError('Verification time is required')
 
 
 # Oxygen Supplier Model
@@ -100,7 +110,6 @@ class Report(models.Model):
     def __str__(self):
         return f'{self.item}'
 
-
 #Instagram
 class Instagram(models.Model):
     info = models.CharField(max_length=250)
@@ -108,3 +117,12 @@ class Instagram(models.Model):
 
     def __str__(self):
         return f'{self.info}'
+
+#Feedback
+class Feedback(models.Model):
+    contact = models.CharField(max_length=200)
+    message = models.CharField(max_length=500)
+    reported_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.contact} - {self.message[:30]}...'

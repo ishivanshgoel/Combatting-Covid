@@ -14,14 +14,56 @@
                 {{ o.name }} - {{ o.city }}
                 <br>
                 <div class="btn-group custombtngrp">
-                    <button class="btn btn-success btn-action btn-Modify"
-                        data-url="/user/oxygen/modify/?id={{ o.id }}">Modify</button>
-                    <button class="btn btn-danger btn-action btn-Delete"
-                        data-url="/user/oxygen/delete/?id={{ o.id }}">Delete</button>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#modifyModal{{o.id}}"><i class="edit icon"></i>Modify</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{o.id}}"><i class="delete icon"></i>Delete</button>
+                    
+                    <div class="modal fade" id="modifyModal{{o.id}}" tabindex="-1" aria-labelledby="modifyModal{{o.id}}Label"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modifyModal{{o.id}}Label">Modify</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="deleteModal{{o.id}}" tabindex="-1" aria-labelledby="deleteModal{{o.id}}Label"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModal{{o.id}}Label">Delete</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- </a> -->
             </li>
         </ul>
+
         {% endfor %}
         <p style="margin: 20px;">No more contributions</p>
     </div>
@@ -61,7 +103,7 @@
                             {% for state in states %}
                             <option value="{{ state }}">{{ state }}</option>
                             {% endfor %}
-                          </select>
+                        </select>
                     </div>
                 </div>
                 <!-- city -->

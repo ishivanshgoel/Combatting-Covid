@@ -4,10 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-
+from .decorators import allowed_users
 # user info model
 from .models import UserInfo
-from .models import Plasma, Oxygen, Pharma
+from .models import Plasma, Oxygen, Pharma, Instagram
 
 # helper functions
 from .Helpers.Statesdata import Statesdata
@@ -82,6 +82,12 @@ def plasma(request):
             p.blood_group = request.POST['bloodgroup']
             p.id = ut.gen_id(p.user, p.name, p.state, 'plasma', p.contact)
             p.save()
+
+            i = Instagram()
+            i.info = p
+            i.id = ut.gen_id('user-name', i.info[0], 'state', 'instagram','contact')
+            i.save()
+
             messages.success(request, 'Thankyou for sharing the information.')
         except:
             messages.warning(request, 'Error!!')
@@ -111,6 +117,13 @@ def oxygen(request):
             Oxy.address = request.POST['address']
             Oxy.id = ut.gen_id(Oxy.user, Oxy.name, Oxy.state, 'oxygen', Oxy.contact)
             Oxy.save()
+
+            i = Instagram()
+            i.info = Oxy
+            i.id = ut.gen_id('user-name', i.info[0], 'state', 'instagram','contact')
+            print(i, i.id)
+            i.save()
+
             messages.success(request, 'Thankyou for sharing the information.')
         except:
             messages.error(request, 'Error!!')
@@ -152,6 +165,12 @@ def pharma(request):
             p.available_drugs = request.POST.getlist('checks[]')
             p.id = ut.gen_id(p.user, p.name, p.state, 'pharma', p.contact)
             p.save()
+
+            i = Instagram()
+            i.info = p
+            i.id = ut.gen_id('user-name', i.info[0], 'state', 'instagram','contact')
+            i.save()
+
             messages.success(request, 'Thankyou for sharing the information.')
         except:
             messages.error(request, 'Error!!')
@@ -168,6 +187,9 @@ def pharma(request):
             "pharma":pharma
         })
 
+@login_required
+def modify(request, id):
+    return HttpResponse("test")
 
 ### Helper Routes ###
 def getDistricts(request):
@@ -182,3 +204,14 @@ def getDistricts(request):
         return HttpResponse(data, content_type='application/json')
     except:
         return HttpResponse('Error')
+
+@login_required
+@allowed_users(allowed_roles=['Verification'])
+def completelist(request):
+    if request.method == 'POST':
+        posted = request.POST.get('postedCheckbox',False)
+        if posted=="on":
+            return HttpResponse("ok")
+    
+    instalist = Instagram.objects.all()
+    return render(request, "user/completelist.html", context={'instalist':instalist})

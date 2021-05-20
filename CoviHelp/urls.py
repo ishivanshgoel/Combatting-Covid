@@ -19,9 +19,12 @@ urlpatterns = [
     path('user', login.user, name="user"),
     path('user/plasma', login.plasma, name="userplasma"),
     path('user/oxygen', login.oxygen, name="useroxygen"),
-    
     path('user/pharma', login.pharma, name="userpharma"),
     path('user/hospital', login.hospital, name="userhospital"),
+
+    path('user/completelist',login.completelist, name="usercompletelist"),
+
+    path('user/modify/<str:id>',login.modify,name='usermodify'),
 
     path('register', register.register, name='register'),
 

@@ -24,6 +24,7 @@ class Hospital(models.Model):
     state = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
+    available = models.BooleanField(default=True)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
 
@@ -36,6 +37,7 @@ class Oxygen(models.Model):
     state = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
+    available = models.BooleanField(default=True)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
 
@@ -57,6 +59,7 @@ class Pharma(models.Model):
     city = models.CharField(max_length=50, default="")
     address = models.TextField(blank=True, default="")
     available_drugs = models.TextField(blank=True)
+    available = models.BooleanField(default=True)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
 
@@ -76,6 +79,7 @@ class Plasma(models.Model):
     city = models.CharField(max_length=50)
     donortype = models.CharField(max_length=50)
     contact = models.CharField(max_length=10)
+    available = models.BooleanField(default=True)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
     blood_group = models.CharField(max_length=10)
@@ -95,3 +99,12 @@ class Report(models.Model):
 
     def __str__(self):
         return f'{self.item}'
+
+
+#Instagram
+class Instagram(models.Model):
+    info = models.CharField(max_length=250)
+    posted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.info}'

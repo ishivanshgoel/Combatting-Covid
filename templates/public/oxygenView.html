@@ -22,6 +22,11 @@
         {% if resource.verified == False %}
         <span class="badge bg-info text-dark" style="margin: 3px;">Not Verified</span>
         {% endif %}
+        {% if resource.available == True %}
+        <span class="badge bg-success" style="margin: 3px;">Available</span>
+        {% else %}
+        <span class="badge bg-info text-dark" style="margin: 3px;">Not Available</span>
+        {% endif %}
       </button>
     </h2>
     <div id="collapseTwo-{{ resource.id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -60,12 +65,12 @@
         </div>
       </div>
       <button type="button" class="btn btn-sm btn-danger ms-4 mb-2 rounded-pill" data-bs-toggle="modal"
-        data-bs-target="#reportModal"><i class="info icon"></i>  Report</button>
-      <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        data-bs-target="#reportModal{{resource.id}}"><i class="info icon"></i>  Report</button>
+      <div class="modal fade" id="reportModal{{resource.id}}" tabindex="-1" aria-labelledby="reportModal{{resource.id}}Label" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="reportModalLabel"><i class="info icon"></i> Report</h5>
+              <h5 class="modal-title" id="reportModal{{resource.id}}Label"><i class="info icon"></i> Report</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

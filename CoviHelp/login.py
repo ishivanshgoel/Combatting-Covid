@@ -76,8 +76,8 @@ def plasma(request):
             p.save()
 
             i = Instagram()
-            i.info = p
-            i.id = ut.gen_id('user-name', i.info[0], 'state', 'instagram','contact')
+            i.info = str(p)
+            i.id = ut.gen_id('user-name', 'Plas', 'state', 'plasma-instagram','contact')
             i.save()
 
             messages.success(request, 'Thankyou for sharing the information.')
@@ -111,8 +111,8 @@ def oxygen(request):
             Oxy.save()
 
             i = Instagram()
-            i.info = Oxy
-            i.id = ut.gen_id('user-name', i.info[0], 'state', 'instagram','contact')
+            i.info = str(Oxy)
+            i.id = ut.gen_id('user-name', 'Oxy', 'state', 'oxygen-instagram','contact')
             print(i, i.id)
             i.save()
 
@@ -149,8 +149,12 @@ def hospital(request):
             H.address = request.POST['address']
             H.bedsavailable = request.POST.getlist('checks[]')
             H.id = ut.gen_id(H.user, H.name, H.state, 'hospital', H.contact)
-            print(H)
             H.save()
+
+            i = Instagram()
+            i.info = str(H)
+            i.id = ut.gen_id('user-name', 'Hos', 'state', 'hospital-instagram','contact')
+            i.save()
             messages.success(request, 'Thankyou for sharing the information.')
         except:
             messages.error(request, 'Error!!')
@@ -186,8 +190,8 @@ def pharma(request):
             p.save()
 
             i = Instagram()
-            i.info = p
-            i.id = ut.gen_id('user-name', i.info[0], 'state', 'instagram','contact')
+            i.info = str(p)
+            i.id = ut.gen_id('user-name', 'Phar', 'state', 'pharma-instagram','contact')
             i.save()
 
             messages.success(request, 'Thankyou for sharing the information.')
@@ -200,7 +204,6 @@ def pharma(request):
             "pharma":pharma
         })
     else:
-        print(available_drugs)
         return render(request, "user/pharma.html", {
             "states": states,
             "drugs":available_drugs,

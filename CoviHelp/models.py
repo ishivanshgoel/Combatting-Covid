@@ -27,12 +27,11 @@ class Hospital(models.Model):
     available = models.BooleanField(default=True)
     address = models.TextField(blank=True)
     bedsavailable = models.TextField(blank=True)
-    instagram_post = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
 
     def __str__(self):
-        return f'{self.name} - {self.state} - {self.city} - Verified : {self.verified_at} -  Instagram Post: { self.verified_at }'
+        return f'{self.name} - {self.state} - {self.city} - Verified : {self.verified_at}'
     
     def clean(self):
         if self.verified and self.verified_at is None:
@@ -108,12 +107,11 @@ class Food(models.Model):
     state = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     contact = models.CharField(max_length=10)
-    instagram_post = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
 
     def __str__(self):
-        return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.verified_at} - {self.instagram_post}'
+        return f'{self.name} - {self.state} - {self.city} - {self.contact} - {self.verified_at}'
 
     def clean(self):
         if self.verified and self.verified_at is None:

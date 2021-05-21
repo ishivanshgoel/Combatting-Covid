@@ -27,6 +27,7 @@ class Hospital(models.Model):
     available = models.BooleanField(default=True)
     address = models.TextField(blank=True)
     bedsavailable = models.TextField(blank=True)
+    posted = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
 
@@ -47,6 +48,7 @@ class Oxygen(models.Model):
     city = models.CharField(max_length=50)
     address = models.TextField(blank=True, default="")
     available = models.BooleanField(default=True)
+    posted = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
 
@@ -69,6 +71,7 @@ class Pharma(models.Model):
     address = models.TextField(blank=True, default="")
     available_drugs = models.TextField(blank=True)
     available = models.BooleanField(default=True)
+    posted = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
 
@@ -89,12 +92,13 @@ class Plasma(models.Model):
     donortype = models.CharField(max_length=50)
     contact = models.CharField(max_length=10)
     available = models.BooleanField(default=True)
+    posted = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
     verified_at = models.DateTimeField(blank=True)
     blood_group = models.CharField(max_length=10)
 
     def __str__(self):
-        return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.contact} - {self.verified_at}'
+        return f'{self.name} - {self.state} - {self.city} - {self.donortype} - {self.blood_group} - {self.contact} - {self.verified_at}'
 
     def clean(self):
         if self.verified and self.verified_at is None:
@@ -125,14 +129,6 @@ class Report(models.Model):
 
     def __str__(self):
         return f'{self.item}'
-
-#Instagram
-class Instagram(models.Model):
-    info = models.CharField(max_length=250)
-    posted = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f'{self.info}'
 
 #Feedback
 class Feedback(models.Model):

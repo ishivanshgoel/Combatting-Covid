@@ -7,7 +7,7 @@ from django.contrib import messages
 from .decorators import allowed_users
 # user info model
 from .models import UserInfo
-from .models import Plasma, Oxygen, Pharma, Hospital, Instagram
+from .models import Plasma, Oxygen, Pharma, Hospital
 
 # helper functions
 from .Helpers.Statesdata import Statesdata
@@ -75,11 +75,6 @@ def plasma(request):
             p.id = ut.gen_id(p.user, p.name, p.state, 'plasma', p.contact)
             p.save()
 
-            i = Instagram()
-            i.info = str(p)
-            i.id = ut.gen_id('user-name', 'Plas', 'state', 'plasma-instagram','contact')
-            i.save()
-
             messages.success(request, 'Thankyou for sharing the information.')
         except:
             messages.warning(request, 'Error!!')
@@ -109,12 +104,6 @@ def oxygen(request):
             Oxy.address = request.POST['address']
             Oxy.id = ut.gen_id(Oxy.user, Oxy.name, Oxy.state, 'oxygen', Oxy.contact)
             Oxy.save()
-
-            i = Instagram()
-            i.info = str(Oxy)
-            i.id = ut.gen_id('user-name', 'Oxy', 'state', 'oxygen-instagram','contact')
-            print(i, i.id)
-            i.save()
 
             messages.success(request, 'Thankyou for sharing the information.')
         except:
@@ -151,10 +140,6 @@ def hospital(request):
             H.id = ut.gen_id(H.user, H.name, H.state, 'hospital', H.contact)
             H.save()
 
-            i = Instagram()
-            i.info = str(H)
-            i.id = ut.gen_id('user-name', 'Hos', 'state', 'hospital-instagram','contact')
-            i.save()
             messages.success(request, 'Thankyou for sharing the information.')
         except:
             messages.error(request, 'Error!!')
@@ -189,11 +174,6 @@ def pharma(request):
             p.id = ut.gen_id(p.user, p.name, p.state, 'pharma', p.contact)
             p.save()
 
-            i = Instagram()
-            i.info = str(p)
-            i.id = ut.gen_id('user-name', 'Phar', 'state', 'pharma-instagram','contact')
-            i.save()
-
             messages.success(request, 'Thankyou for sharing the information.')
         except:
             messages.error(request, 'Error!!')
@@ -226,15 +206,51 @@ def getDistricts(request):
         data = json.dumps(data)
         return HttpResponse(data, content_type='application/json')
     except:
-        return HttpResponse('Error')
+        return HttpResponse('Error')    
 
 @login_required
 @allowed_users(allowed_roles=['Verification'])
 def completelist(request):
     if request.method == 'POST':
         posted = request.POST.get('postedCheckbox',False)
-        if posted=="on":
-            return HttpResponse("ok")
+        id = request.POST.get('id',False)
+        modelType = request.POST['modelType']
+
+        if id!=False:
+            if modelType == "Oxygen":
+                o = Oxygen.objects.get(id=id)
+                if posted=="on":
+                    o.posted = True
+                else:
+                    o.posted = False
+                o.save()
+            elif modelType == "Pharma":
+                p = Pharma.objects.get(id=id)
+                if posted=="on":
+                    p.posted = True
+                else:
+                    p.posted = False
+                p.save()
+            elif modelType == "Plasma":
+                p = Plasma.objects.get(id=id)
+                if posted=="on":
+                    p.posted = True
+                else:
+                    p.posted = False
+                p.save()
+            elif modelType == "Hospital":
+                h = Hospital.objects.get(id=id)
+                if posted=="on":
+                    h.posted = True
+                else:
+                    h.posted = False
+                h.save()
+
+    context = {}
     
-    instalist = Instagram.objects.all()
-    return render(request, "user/completelist.html", context={'instalist':instalist})
+    context['oxygenList'] = Oxygen.objects.all()
+    context['pharmaList'] = Pharma.objects.all()
+    context['plasmaList'] = Plasma.objects.all()
+    context['hospitalList'] = Hospital.objects.all()
+    
+    return render(request, "user/completelist.html",context=context)
